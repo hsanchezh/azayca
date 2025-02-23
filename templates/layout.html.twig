@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estás dentro {{ app.user.login }}{% endblock %}
+{% block stylesheets %}
+    <style>
+        .menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .menu li {
+            display: inline;
+        }
+
+        .menu a, .menu a:hover{
+            text-decoration: none;
+        }
+    </style>
+{% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+
+{% block menu %}
+    <div class="menu">
+        <nav class="menu">
+            <ul>
+                <li><a href="{{ path('app_main_menu') }}">Inicio</a></li>
+                <li><a href="{{ path('app_conductor_index') }}">Conductores</a></li>
+                <li><a href="{{ path('app_localidad_index') }}">Localidades</a></li>
+                <li><a href="{{ path('app_paciente_index') }}">Pacientes</a></li>
+                <li><a href="{{ path('app_tarifa_espera_index') }}">Tarifas espera</a></li>
+                <li><a href="{{ path('app_tarifa_km_index') }}">Tarifas km</a></li>
+                <li><a href="{{ path('app_viaje_index') }}">Viajes</a></li>
+                {% if app.user.esAdmin %}
+                    <li><a href="{{ path('app_usuario_index') }}">Usuarios</a></li>
+                {% endif %}
+                <li><a href="{{ path('app_logout') }}">Desconectar</a></li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block body %}{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Conductor{% endblock %}
+
+{% block body %}
+    <h1>Conductor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ conductor.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ conductor.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido1</th>
+                <td>{{ conductor.apellido1 }}</td>
+            </tr>
+            <tr>
+                <th>Apellido2</th>
+                <td>{{ conductor.apellido2 }}</td>
+            </tr>
+            <tr>
+                <th>Nif</th>
+                <td>{{ conductor.nif }}</td>
+            </tr>
+            <tr>
+                <th>Fecha_alta</th>
+                <td>{{ conductor.fechaAlta ? conductor.fechaAlta|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fecha_baja</th>
+                <td>{{ conductor.fechaBaja ? conductor.fechaBaja|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_conductor_index') }}">back to list</a>
+
+    <a href="{{ path('app_conductor_edit', {'id': conductor.id}) }}">edit</a>
+
+    {{ include('conductor/_delete_form.html.twig') }}
+{% endblock %}

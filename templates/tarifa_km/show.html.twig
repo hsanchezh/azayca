@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}TarifaKm{% endblock %}
+
+{% block body %}
+    <h1>TarifaKm</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tarifa_km.id }}</td>
+            </tr>
+            <tr>
+                <th>Inicio_vigencia</th>
+                <td>{{ tarifa_km.inicioVigencia ? tarifa_km.inicioVigencia|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fin_vigencia</th>
+                <td>{{ tarifa_km.finVigencia ? tarifa_km.finVigencia|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Precio_km</th>
+                <td>{{ tarifa_km.precioKm }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tarifa_km_index') }}">back to list</a>
+
+    <a href="{{ path('app_tarifa_km_edit', {'id': tarifa_km.id}) }}">edit</a>
+
+    {{ include('tarifa_km/_delete_form.html.twig') }}
+{% endblock %}

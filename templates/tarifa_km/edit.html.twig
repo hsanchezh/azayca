@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Edit TarifaKm{% endblock %}
+
+{% block body %}
+    <h1>Edit TarifaKm</h1>
+
+    {{ include('tarifa_km/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_tarifa_km_index') }}">back to list</a>
+
+    {{ include('tarifa_km/_delete_form.html.twig') }}
+{% endblock %}

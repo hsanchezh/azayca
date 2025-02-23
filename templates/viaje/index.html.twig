@@ -1,0 +1,51 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Viaje index{% endblock %}
+
+{% block body %}
+    <h1>Viaje index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Es_ida_vuelta</th>
+                <th>Valoracion</th>
+                <th>Comentarios</th>
+                <th>Num_kilometros</th>
+                <th>Importe_distancia</th>
+                <th>Horas_espera</th>
+                <th>Importe_espera</th>
+                <th>Importe_total</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for viaje in viajes %}
+            <tr>
+                <td>{{ viaje.id }}</td>
+                <td>{{ viaje.fecha ? viaje.fecha|date('Y-m-d') : '' }}</td>
+                <td>{{ viaje.esIdaVuelta ? 'Yes' : 'No' }}</td>
+                <td>{{ viaje.valoracion }}</td>
+                <td>{{ viaje.comentarios }}</td>
+                <td>{{ viaje.numKilometros }}</td>
+                <td>{{ viaje.importeDistancia }}</td>
+                <td>{{ viaje.horasEspera }}</td>
+                <td>{{ viaje.importeEspera }}</td>
+                <td>{{ viaje.importeTotal }}</td>
+                <td>
+                    <a href="{{ path('app_viaje_show', {'id': viaje.id}) }}">show</a>
+                    <a href="{{ path('app_viaje_edit', {'id': viaje.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_viaje_new') }}">Create new</a>
+{% endblock %}

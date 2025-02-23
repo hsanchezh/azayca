@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}TarifaKm index{% endblock %}
+
+{% block body %}
+    <h1>TarifaKm index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Inicio_vigencia</th>
+                <th>Fin_vigencia</th>
+                <th>Precio_km</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tarifa_km in tarifa_kms %}
+            <tr>
+                <td>{{ tarifa_km.id }}</td>
+                <td>{{ tarifa_km.inicioVigencia ? tarifa_km.inicioVigencia|date('Y-m-d') : '' }}</td>
+                <td>{{ tarifa_km.finVigencia ? tarifa_km.finVigencia|date('Y-m-d') : '' }}</td>
+                <td>{{ tarifa_km.precioKm }}</td>
+                <td>
+                    <a href="{{ path('app_tarifa_km_show', {'id': tarifa_km.id}) }}">show</a>
+                    <a href="{{ path('app_tarifa_km_edit', {'id': tarifa_km.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tarifa_km_new') }}">Create new</a>
+{% endblock %}

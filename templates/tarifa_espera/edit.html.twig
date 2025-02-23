@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Edit TarifaEspera{% endblock %}
+
+{% block body %}
+    <h1>Edit TarifaEspera</h1>
+
+    {{ include('tarifa_espera/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_tarifa_espera_index') }}">back to list</a>
+
+    {{ include('tarifa_espera/_delete_form.html.twig') }}
+{% endblock %}

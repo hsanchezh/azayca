@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}TarifaEspera index{% endblock %}
+
+{% block body %}
+    <h1>TarifaEspera index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Inicio_vigencia</th>
+                <th>Fin_vigencia</th>
+                <th>Precio_hora</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tarifa_espera in tarifa_esperas %}
+            <tr>
+                <td>{{ tarifa_espera.id }}</td>
+                <td>{{ tarifa_espera.inicioVigencia ? tarifa_espera.inicioVigencia|date('Y-m-d') : '' }}</td>
+                <td>{{ tarifa_espera.finVigencia ? tarifa_espera.finVigencia|date('Y-m-d') : '' }}</td>
+                <td>{{ tarifa_espera.precioHora }}</td>
+                <td>
+                    <a href="{{ path('app_tarifa_espera_show', {'id': tarifa_espera.id}) }}">show</a>
+                    <a href="{{ path('app_tarifa_espera_edit', {'id': tarifa_espera.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tarifa_espera_new') }}">Create new</a>
+{% endblock %}
