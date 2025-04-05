@@ -1,26 +1,31 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Localidad{% endblock %}
+{% block title %}{{ navega_detalle_localidad }}{% endblock %}
 
-{% block body %}
-    <h1>Localidad</h1>
+{% block cabecera %}
+    <h1>{{ navega_detalle_localidad }}</h1>
+{% endblock %}
 
-    <table class="table">
+{% block contenido %}
+    <table class="{{ estilo_tabla }}">
         <tbody>
+<!--Nota: Eliminar campo id -->
             <tr>
                 <th>Id</th>
                 <td>{{ localidad.id }}</td>
             </tr>
             <tr>
-                <th>Nombre</th>
+                <th>{{ etiqueta_nombre_localidad }}</th>
                 <td>{{ localidad.nombre }}</td>
             </tr>
         </tbody>
     </table>
+{% endblock %}
 
-    <a href="{{ path('app_localidad_index') }}">back to list</a>
+{% block acciones %}
+    <a href="{{ path('app_localidad_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 
-    <a href="{{ path('app_localidad_edit', {'id': localidad.id}) }}">edit</a>
+    <a href="{{ path('app_localidad_edit', {'id': localidad.id}) }}" class="{{ estilo_boton_editar }}">{{ editar }}</a>
 
     {{ include('localidad/_delete_form.html.twig') }}
 {% endblock %}

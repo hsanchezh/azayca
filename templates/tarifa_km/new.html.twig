@@ -1,11 +1,17 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}New TarifaKm{% endblock %}
+{% block title %}{{ navega_nueva_tarifa_km }}{% endblock %}
 
-{% block body %}
-    <h1>Create new TarifaKm</h1>
+{% block cabecera %}
+    <h1>{{ navega_nueva_tarifa_km }}</h1>
+{% endblock %}
+
+{% block contenido %}
 
     {{ include('tarifa_km/_form.html.twig') }}
 
-    <a href="{{ path('app_tarifa_km_index') }}">back to list</a>
+{% endblock %}
+
+{% block acciones %}
+    <a href="{{ path('app_tarifa_km_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 {% endblock %}

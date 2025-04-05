@@ -1,34 +1,39 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}TarifaKm{% endblock %}
+{% block title %}{{ navega_detalle_tarifa_km }}{% endblock %}
 
-{% block body %}
-    <h1>TarifaKm</h1>
+{% block cabecera %}
+    <h1>{{ navega_detalle_tarifa_km }}</h1>
+{% endblock %}
 
-    <table class="table">
+{% block contenido %}
+    <table class="{{ estilo_tabla }}">
         <tbody>
+<!--Nota: eliminar id-->
             <tr>
                 <th>Id</th>
                 <td>{{ tarifa_km.id }}</td>
             </tr>
             <tr>
-                <th>Inicio_vigencia</th>
-                <td>{{ tarifa_km.inicioVigencia ? tarifa_km.inicioVigencia|date('Y-m-d') : '' }}</td>
+                <th>{{ etiqueta_inicio_vigencia }}</th>
+                <td>{{ tarifa_km.inicioVigencia ? tarifa_km.inicioVigencia|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
-                <th>Fin_vigencia</th>
-                <td>{{ tarifa_km.finVigencia ? tarifa_km.finVigencia|date('Y-m-d') : '' }}</td>
+                <th>{{ etiqueta_fin_vigencia }}</th>
+                <td>{{ tarifa_km.finVigencia ? tarifa_km.finVigencia|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
-                <th>Precio_km</th>
+                <th>{{ etiqueta_precio_km }}</th>
                 <td>{{ tarifa_km.precioKm }}</td>
             </tr>
         </tbody>
     </table>
+{% endblock %}
 
-    <a href="{{ path('app_tarifa_km_index') }}">back to list</a>
+{% block acciones %}
+    <a href="{{ path('app_tarifa_km_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 
-    <a href="{{ path('app_tarifa_km_edit', {'id': tarifa_km.id}) }}">edit</a>
+    <a href="{{ path('app_tarifa_km_edit', {'id': tarifa_km.id}) }}" class="{{ estilo_boton_editar }}">{{ editar }}</a>
 
     {{ include('tarifa_km/_delete_form.html.twig') }}
 {% endblock %}

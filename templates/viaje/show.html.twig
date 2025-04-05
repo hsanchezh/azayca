@@ -1,58 +1,59 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Viaje{% endblock %}
+{% block title %}{{ navega_detalle_viaje }}{% endblock %}
 
 {% block body %}
-    <h1>Viaje</h1>
+    <h1>{{ navega_detalle_viaje }}</h1>
 
-    <table class="table">
+    <table class="{{ estilo_tabla }}">
         <tbody>
+<!--Nota: Quitar id-->
             <tr>
                 <th>Id</th>
                 <td>{{ viaje.id }}</td>
             </tr>
             <tr>
-                <th>Fecha</th>
-                <td>{{ viaje.fecha ? viaje.fecha|date('Y-m-d') : '' }}</td>
+                <th>{{ etiqueta_fecha }}</th>
+                <td>{{ viaje.fecha ? viaje.fecha|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
-                <th>Es_ida_vuelta</th>
-                <td>{{ viaje.esIdaVuelta ? 'Yes' : 'No' }}</td>
+                <th>{{ etiqueta_es_ida_y_vuelta }}</th>
+                <td>{{ viaje.esIdaVuelta ? booleano_si : booleano_no }}</td>
             </tr>
             <tr>
-                <th>Valoracion</th>
-                <td>{{ viaje.valoracion }}</td>
+                <th>{{ etiqueta_valoracion_viaje }}</th>
+                <td>{{ viaje.valoracion.value }}</td>
             </tr>
             <tr>
-                <th>Comentarios</th>
+                <th>{{ etiqueta_comentarios_viaje }}</th>
                 <td>{{ viaje.comentarios }}</td>
             </tr>
             <tr>
-                <th>Num_kilometros</th>
+                <th>{{ etiqueta_kilometros }}</th>
                 <td>{{ viaje.numKilometros }}</td>
             </tr>
             <tr>
-                <th>Importe_distancia</th>
+                <th>{{ etiqueta_importe_kilometros }}</th>
                 <td>{{ viaje.importeDistancia }}</td>
             </tr>
             <tr>
-                <th>Horas_espera</th>
+                <th>{{ etiqueta_espera }}</th>
                 <td>{{ viaje.horasEspera }}</td>
             </tr>
             <tr>
-                <th>Importe_espera</th>
+                <th>{{ etiqueta_importe_espera }}</th>
                 <td>{{ viaje.importeEspera }}</td>
             </tr>
             <tr>
-                <th>Importe_total</th>
+                <th>{{ etiqueta_importe_total }}</th>
                 <td>{{ viaje.importeTotal }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_viaje_index') }}">back to list</a>
+    <a href="{{ path('app_viaje_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 
-    <a href="{{ path('app_viaje_edit', {'id': viaje.id}) }}">edit</a>
+    <a href="{{ path('app_viaje_edit', {'id': viaje.id}) }}" class="{{ estilo_boton_editar }}">{{ editar }}</a>
 
     {{ include('viaje/_delete_form.html.twig') }}
 {% endblock %}

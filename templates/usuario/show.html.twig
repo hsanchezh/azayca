@@ -1,42 +1,43 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Usuario{% endblock %}
+{% block title %}{{ navega_detalle_usuario }}{% endblock %}
 
 {% block body %}
-    <h1>Usuario</h1>
+    <h1>{{ navega_detalle_usuario }}</h1>
 
-    <table class="table">
+    <table class="{{ estilo_tabla }}">
         <tbody>
+<!--Nota: Eliminar campo id-->
             <tr>
                 <th>Id</th>
                 <td>{{ usuario.id }}</td>
             </tr>
             <tr>
-                <th>Login</th>
+                <th>{{ etiqueta_login }}</th>
                 <td>{{ usuario.login }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
+                <th>{{ etiqueta_rol_usuario }}</th>
                 <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>{{ etiqueta_password }}</th>
                 <td>{{ usuario.password }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>{{ etiqueta_email }}</th>
                 <td>{{ usuario.email }}</td>
             </tr>
             <tr>
-                <th>Es_admin</th>
-                <td>{{ usuario.esAdmin ? 'Yes' : 'No' }}</td>
+                <th>{{ etiqueta_es_admin }}</th>
+                <td>{{ usuario.esAdmin ? booleano_si : booleano_no }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_usuario_index') }}">back to list</a>
+    <a href="{{ path('app_usuario_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 
-    <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">edit</a>
+    <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}" class="{{ estilo_boton_editar }}">{{ editar }}</a>
 
     {{ include('usuario/_delete_form.html.twig') }}
 {% endblock %}

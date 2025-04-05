@@ -1,39 +1,44 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}TarifaKm index{% endblock %}
+{% block title %}{{ navega_listado_tarifa_km }}{% endblock %}
 
-{% block body %}
-    <h1>TarifaKm index</h1>
+{% block cabecera %}
+    <h1>{{ navega_listado_tarifa_km }}</h1>
+{% endblock %}
 
-    <table class="table">
+{% block contenido %}
+    <table class="{{ estilo_tabla }}">
         <thead>
             <tr>
+<!--Nota: Quitar id-->
                 <th>Id</th>
-                <th>Inicio_vigencia</th>
-                <th>Fin_vigencia</th>
-                <th>Precio_km</th>
-                <th>actions</th>
+                <th>{{ etiqueta_inicio_vigencia }}</th>
+                <th>{{ etiqueta_fin_vigencia }}</th>
+                <th>{{ etiqueta_precio_km }}</th>
+                <th>{{ etiqueta_acciones }}</th>
             </tr>
         </thead>
         <tbody>
         {% for tarifa_km in tarifa_kms %}
             <tr>
                 <td>{{ tarifa_km.id }}</td>
-                <td>{{ tarifa_km.inicioVigencia ? tarifa_km.inicioVigencia|date('Y-m-d') : '' }}</td>
-                <td>{{ tarifa_km.finVigencia ? tarifa_km.finVigencia|date('Y-m-d') : '' }}</td>
+                <td>{{ tarifa_km.inicioVigencia ? tarifa_km.inicioVigencia|date('d-m-Y') : '' }}</td>
+                <td>{{ tarifa_km.finVigencia ? tarifa_km.finVigencia|date('d-m-Y') : '' }}</td>
                 <td>{{ tarifa_km.precioKm }}</td>
                 <td>
-                    <a href="{{ path('app_tarifa_km_show', {'id': tarifa_km.id}) }}">show</a>
-                    <a href="{{ path('app_tarifa_km_edit', {'id': tarifa_km.id}) }}">edit</a>
+                    <a href="{{ path('app_tarifa_km_show', {'id': tarifa_km.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
+                    <a href="{{ path('app_tarifa_km_edit', {'id': tarifa_km.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
 
-    <a href="{{ path('app_tarifa_km_new') }}">Create new</a>
+{% block acciones %}
+    <a href="{{ path('app_tarifa_km_new') }}" class="{{ estilo_boton_nuevo_elemento }}">{{ navega_nueva_tarifa_km }}</a>
 {% endblock %}

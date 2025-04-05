@@ -1,11 +1,15 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}New TarifaEspera{% endblock %}
+{% block title %}{{ navega_nueva_tarifa_espera }}{% endblock %}
 
-{% block body %}
-    <h1>Create new TarifaEspera</h1>
+{% block cabecera %}
+    <h1>{{ navega_nueva_tarifa_espera }}</h1>
+{% endblock %}
 
+{% block contenido %}
     {{ include('tarifa_espera/_form.html.twig') }}
+{% endblock %}
 
-    <a href="{{ path('app_tarifa_espera_index') }}">back to list</a>
+{% block acciones %}
+    <a href="{{ path('app_tarifa_espera_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 {% endblock %}

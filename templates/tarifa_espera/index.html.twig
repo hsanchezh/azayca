@@ -1,18 +1,21 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}TarifaEspera index{% endblock %}
+{% block title %}{{ navega_listado_tarifa_espera }}{% endblock %}
 
-{% block body %}
-    <h1>TarifaEspera index</h1>
+{% block cabecera %}
+    <h1>{{ navega_listado_tarifa_espera }}</h1>
+{% endblock %}
 
-    <table class="table">
+{% block contenido %}
+    <table class="{{ estilo_tabla }}">
         <thead>
+<!--Nota: Eliminar el id-->
             <tr>
                 <th>Id</th>
-                <th>Inicio_vigencia</th>
-                <th>Fin_vigencia</th>
-                <th>Precio_hora</th>
-                <th>actions</th>
+                <th>{{ etiqueta_inicio_vigencia }}</th>
+                <th>{{ etiqueta_fin_vigencia }}</th>
+                <th>{{ etiqueta_precio_hora }}</th>
+                <th>{{ etiqueta_acciones }}</th>
             </tr>
         </thead>
         <tbody>
@@ -23,17 +26,19 @@
                 <td>{{ tarifa_espera.finVigencia ? tarifa_espera.finVigencia|date('Y-m-d') : '' }}</td>
                 <td>{{ tarifa_espera.precioHora }}</td>
                 <td>
-                    <a href="{{ path('app_tarifa_espera_show', {'id': tarifa_espera.id}) }}">show</a>
-                    <a href="{{ path('app_tarifa_espera_edit', {'id': tarifa_espera.id}) }}">edit</a>
+                    <a href="{{ path('app_tarifa_espera_show', {'id': tarifa_espera.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
+                    <a href="{{ path('app_tarifa_espera_edit', {'id': tarifa_espera.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
 
-    <a href="{{ path('app_tarifa_espera_new') }}">Create new</a>
+{% block acciones %}
+    <a href="{{ path('app_tarifa_espera_new') }}" class="{{ estilo_boton_nuevo_elemento }}">{{ navega_nueva_tarifa_espera }}</a>
 {% endblock %}

@@ -1,11 +1,17 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}New Conductor{% endblock %}
+{% block title %}{{ navega_nuevo_conductor }}{% endblock %}
 
-{% block body %}
-    <h1>Create new Conductor</h1>
+{% block cabecera %}
+    <h1>
+        {{ navega_nuevo_conductor }}
+    </h1>
+{% endblock %}
 
+{% block contenido %}
     {{ include('conductor/_form.html.twig') }}
+{% endblock %}
 
-    <a href="{{ path('app_conductor_index') }}">back to list</a>
+{% block acciones %}
+    <a href="{{ path('app_conductor_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }} de conductores</a>
 {% endblock %}

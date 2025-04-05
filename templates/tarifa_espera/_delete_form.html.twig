@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('app_tarifa_espera_delete', {'id': tarifa_espera.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+<form method="post" action="{{ path('app_tarifa_espera_delete', {'id': tarifa_espera.id}) }}" onsubmit="return confirm('{{ confirmar_borrado_tarifa_espera }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tarifa_espera.id) }}">
-    <button class="btn">Delete</button>
+    <button class="{{ estilo_boton_eliminar }}">{{ eliminar }}</button>
 </form>

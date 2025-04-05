@@ -1,11 +1,15 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}New Paciente{% endblock %}
+{% block title %}{{ navega_nuevo_paciente }}{% endblock %}
 
-{% block body %}
-    <h1>Create new Paciente</h1>
+{% block cabecera %}
+    <h1>{{ navega_nuevo_paciente }}</h1>
+{% endblock %}
 
+{% block contenido %}
     {{ include('paciente/_form.html.twig') }}
+{% endblock %}
 
-    <a href="{{ path('app_paciente_index') }}">back to list</a>
+{% block acciones %}
+    <a href="{{ path('app_paciente_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 {% endblock %}

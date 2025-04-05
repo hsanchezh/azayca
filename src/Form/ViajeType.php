@@ -7,9 +7,11 @@ use App\Entity\Localidad;
 use App\Entity\Paciente;
 use App\Entity\TarifaEspera;
 use App\Entity\TarifaKm;
+use App\Entity\Valoracion;
 use App\Entity\Viaje;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +24,9 @@ class ViajeType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('es_ida_vuelta')
-            ->add('valoracion')
+            ->add('valoracion', EnumType::class, [
+                'class' => Valoracion::class
+            ])
             ->add('comentarios')
             ->add('num_kilometros')
             ->add('importe_distancia')

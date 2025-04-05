@@ -1,58 +1,63 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Paciente{% endblock %}
+{% block title %}{{ navega_detalle_paciente }}{% endblock %}
 
-{% block body %}
-    <h1>Paciente</h1>
+{% block cabecera %}
+    <h1>{{ navega_detalle_paciente }}</h1>
+{% endblock %}
 
-    <table class="table">
+{% block contenido %}
+    <table class="{{ estilo_tabla }}">
         <tbody>
+<!-- Nota: Borrar el campo id -->
             <tr>
                 <th>Id</th>
                 <td>{{ paciente.id }}</td>
             </tr>
             <tr>
-                <th>Nombre</th>
+                <th>{{ etiqueta_nombre }}</th>
                 <td>{{ paciente.nombre }}</td>
             </tr>
             <tr>
-                <th>Apellido1</th>
+                <th>{{ etiqueta_apellido1 }}</th>
                 <td>{{ paciente.apellido1 }}</td>
             </tr>
             <tr>
-                <th>Apellido2</th>
+                <th>{{ etiqueta_apellido2 }}</th>
                 <td>{{ paciente.apellido2 }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>{{ etiqueta_email }}</th>
                 <td>{{ paciente.email }}</td>
             </tr>
             <tr>
-                <th>Telefono</th>
+                <th>{{ etiqueta_telefono1 }}</th>
                 <td>{{ paciente.telefono }}</td>
             </tr>
             <tr>
-                <th>Telefono2</th>
+                <th>{{ etiqueta_telefono2 }}</th>
                 <td>{{ paciente.telefono2 }}</td>
             </tr>
             <tr>
-                <th>Dni</th>
+                <th>{{ etiqueta_dni }}</th>
                 <td>{{ paciente.dni }}</td>
             </tr>
             <tr>
                 <th>Es_socio</th>
-                <td>{{ paciente.esSocio ? 'Yes' : 'No' }}</td>
+                <td>{{ paciente.esSocio ? booleano_si : booleano_no }}</td>
             </tr>
             <tr>
-                <th>Codigo</th>
+                <th>{{ etiqueta_codigo_paciente }}</th>
                 <td>{{ paciente.codigo }}</td>
             </tr>
         </tbody>
     </table>
+{% endblock %}
 
-    <a href="{{ path('app_paciente_index') }}">back to list</a>
+{% block acciones %}
+    <a href="{{ path('app_paciente_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 
-    <a href="{{ path('app_paciente_edit', {'id': paciente.id}) }}">edit</a>
+    <a href="{{ path('app_paciente_edit', {'id': paciente.id}) }}" class="{{ estilo_boton_editar }}">{{ editar }}</a>
 
     {{ include('paciente/_delete_form.html.twig') }}
 {% endblock %}

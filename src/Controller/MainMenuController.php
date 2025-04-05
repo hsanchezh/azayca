@@ -14,9 +14,6 @@ final class MainMenuController extends AbstractController
     #[Route('/main/menu', name: 'app_main_menu')]
     public function index(AuthenticationUtils $authenticationUtils, EntityManagerInterface $entityManager): Response
     {
-        //$login = $authenticationUtils->getLastUsername();
-        //$usuario=$entityManager->getRepository(Usuario::class)->findByLogin($login);
-
         return $this->render('main_menu/index.html.twig', [
             'controller_name' => 'MainMenuController'
         ]);

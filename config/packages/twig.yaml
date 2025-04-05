@@ -1,6 +1,140 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+# botones y mensajes de navegacion    
+        ver_detalle: 'Ver detalle'
+        guardar: 'Guardar'
+        editar: 'Editar'
+        eliminar: 'Eliminar'
+        actualizar: 'Actualizar'
+        sin_resultados: 'No se han encontrado'
+        volver_al_listado: 'Volver al listado'
+        confirmar_borrado_conductor: '¿Seguro que desea eliminar este conductor?'
+        confirmar_borrado_paciente: '¿Seguro que desea eliminar este paciente?'
+        confirmar_borrado_localidad: '¿Seguro que desea eliminar esta localidad?'
+        confirmar_borrado_usuario: '¿Seguro que desea eliminar este usuario?'
+        confirmar_borrado_viaje: '¿Seguro que desea eliminar este viaje?'
+        confirmar_borrado_tarifa_espera: '¿Seguro que desea eliminar esta tarifa de espera?'
+        confirmar_borrado_tarifa_km: '¿Seguro que desea eliminar esta tarifa por kilómetros?'
+        booleano_si: 'Sí'
+        booleano_no: 'No'
+        
+
+#opciones, navegacion y titulos
+        navega_inicio: 'Inicio'
+        
+        navega_ver_conductores: 'Ver conductores'
+        navega_nuevo_conductor: 'Nuevo conductor'
+        navega_detalle_conductor: 'Detalle del conductor'
+        navega_editar_conductor: 'Editar conductor'
+        navega_listado_conductores: 'Listado de conductores'
+        
+        navega_ver_localidades: 'Ver localidades'
+        navega_nueva_localidad: 'Nueva localidad'
+        navega_detalle_localidad: 'Detalle del conductor'
+        navega_editar_localidad: 'Editar conductor'
+        navega_listado_localidades: 'Listado de localidades'
+        
+        navega_ver_pacientes: 'Ver pacientes'
+        navega_nuevo_paciente: 'Nuevo paciente'
+        navega_detalle_paciente: 'Detalle del paciente'
+        navega_editar_paciente: 'Editar paciente'
+        navega_listado_pacientes: 'Listado de pacientes'
+        
+        navega_ver_tarifa_espera: 'Ver tarifa de espera'
+        navega_nueva_tarifa_espera: 'Nueva tarifa de espera'
+        navega_detalle_tarifa_espera: 'Detalle de la tarifa de espera'
+        navega_editar_tarifa_espera: 'Editar tarifa de espera'
+        navega_listado_tarifa_espera: 'Listado de tarifas de espera'
+
+        navega_ver_tarifa_km: 'Ver tarifa por km'
+        navega_nueva_tarifa_km: 'Nueva tarifa por km'
+        navega_detalle_tarifa_km: 'Detalle de la tarifa por km'
+        navega_editar_tarifa_km: 'Editar tarifa por km'
+        navega_listado_tarifa_km: 'Listado de tarifas por km'
+        
+        
+        navega_ver_viajes: 'Ver viajes'
+        navega_nuevo_viaje: 'Nuevo viaje'
+        navega_detalle_viaje: 'Detalle del viaje'
+        navega_editar_viaje: 'Editar viaje'
+        navega_listado_viajes: 'Listado de viajes'
+        
+        navega_ver_usuarios: 'Ver usuarios'
+        navega_nuevo_usuario: 'Nuevo usuario'
+        navega_detalle_usuario: 'Detalle del usuario'
+        navega_editar_usuario: 'Editar usuario'
+        navega_listado_usuarios: 'Listado de usuarios'
+        
+# etiquetas datos comunes    
+        etiqueta_nombre: 'Nombre'
+        etiqueta_apellido1: 'Apellido 1'
+        etiqueta_apellido2: 'Apellido 2'
+        etiqueta_fecha: 'Fecha'
+        etiqueta_fecha_alta: 'Fecha de alta'
+        etiqueta_fecha_baja: 'Fecha de baja'
+        etiqueta_acciones: 'Acciones'
+        etiqueta_email: 'Email'
+        etiqueta_telefono1: 'Teléfono'
+        etiqueta_telefono2: 'Teléfono secundario'
+        etiqueta_dni: 'DNI'
+        etiqueta_es_socio: 'Es socio'
+        etiqueta_codigo_paciente: 'Código'
+        
+# conductor
+        etiqueta_nombre_completo_conductor: 'Conductor'
+        etiqueta_nif_conductor: 'NIF'
+        
+# paciente
+        etiqueta_nombre_completo_paciente: 'Paciente'
+        
+# localidad
+        etiqueta_nombre_localidad: 'Nombre de la localidad'   
+        
+# usuario
+        etiqueta_login: 'Login'
+        etiqueta_password: 'Password'
+        etiqueta_rol_usuario: 'Rol de usuario'
+        etiqueta_es_admin: 'Es administrador'
+        
+# viaje
+        etiqueta_es_ida_y_vuelta: 'Es ida y vuelta'
+        etiqueta_valoracion_viaje: 'Valoración'
+        etiqueta_comentarios_viaje: 'Comentarios'
+        etiqueta_kilometros: 'Kilómetros'
+        etiqueta_importe_kilometros: 'Importe distancia'
+        etiqueta_espera: 'Espera'
+        etiqueta_importe_espera: 'Importe espera'
+        etiqueta_importe_total: 'Total'
+        
+# tarifas
+        etiqueta_inicio_vigencia: 'Inicio de la vigencia'        
+        etiqueta_fin_vigencia: 'Fin de la vigencia'        
+        etiqueta_precio_hora: 'Precio por hora'
+        etiqueta_precio_km: 'Precio por kilómetro'
+        
+        
+# estilos
+        estilo_tabla: 'table table-striped'
+        estilo_boton_eliminar: 'btn btn-primary'
+        estilo_boton_guardar: 'btn btn-primary'
+        estilo_boton_detalle: 'btn btn-primary'
+        estilo_boton_detalle_incrustado: 'btn btn-outline-secondary'
+        estilo_boton_editar: 'btn btn-primary'
+        estilo_boton_editar_incrustado: 'btn btn-outline-secondary'
+        estilo_boton_nuevo_elemento: 'btn btn-primary'
+        estilo_boton_volver: 'btn btn-primary'
+
+                
 
 when@test:
     twig:
         strict_variables: true
+        form_themes: ['bootstrap_5_layout.html.twig']
+        
+        
+        
+        
+        
+        
+        

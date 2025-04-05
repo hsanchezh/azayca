@@ -1,16 +1,19 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Localidad index{% endblock %}
+{% block title %}{{ navega_listado_localidades }}{% endblock %}
 
-{% block body %}
-    <h1>Localidad index</h1>
+{% block cabecera %}
+    <h1>{{ navega_listado_localidades }}</h1>
+{% endblock %}
 
+{% block contenido %}
     <table class="table">
         <thead>
             <tr>
+<!--Nota: quitar id-->
                 <th>Id</th>
-                <th>Nombre</th>
-                <th>actions</th>
+                <th>{{ etiqueta_nombre_localidad }}</th>
+                <th>{{ etiqueta_acciones }}</th>
             </tr>
         </thead>
         <tbody>
@@ -19,17 +22,19 @@
                 <td>{{ localidad.id }}</td>
                 <td>{{ localidad.nombre }}</td>
                 <td>
-                    <a href="{{ path('app_localidad_show', {'id': localidad.id}) }}">show</a>
-                    <a href="{{ path('app_localidad_edit', {'id': localidad.id}) }}">edit</a>
+                    <a href="{{ path('app_localidad_show', {'id': localidad.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
+                    <a href="{{ path('app_localidad_edit', {'id': localidad.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
 
-    <a href="{{ path('app_localidad_new') }}">Create new</a>
+{% block acciones %}
+    <a href="{{ path('app_localidad_new') }}" class="{{ estilo_boton_nuevo_elemento }}">{{ navega_nueva_localidad }}</a>
 {% endblock %}

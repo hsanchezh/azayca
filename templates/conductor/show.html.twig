@@ -1,46 +1,53 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Conductor{% endblock %}
+{% block title %}{{ navega_detalle_conductor }}{% endblock %}
 
-{% block body %}
-    <h1>Conductor</h1>
+{% block cabecera %}
+    <h1>{{ navega_detalle_conductor }}</h1>
+{% endblock %}
 
-    <table class="table">
+{% block contenido %}
+    <table class="{{ estilo_tabla }}">
         <tbody>
+<!-- Nota: Eliminar el id -->
             <tr>
                 <th>Id</th>
                 <td>{{ conductor.id }}</td>
             </tr>
             <tr>
-                <th>Nombre</th>
+                <th>{{ etiqueta_nombre }}</th>
                 <td>{{ conductor.nombre }}</td>
             </tr>
             <tr>
-                <th>Apellido1</th>
+                <th>{{ etiqueta_apellido1 }}</th>
                 <td>{{ conductor.apellido1 }}</td>
             </tr>
             <tr>
-                <th>Apellido2</th>
+                <th>{{ etiqueta_apellido2 }}</th>
                 <td>{{ conductor.apellido2 }}</td>
             </tr>
             <tr>
-                <th>Nif</th>
+                <th>{{ etiqueta_nif_conductor }}</th>
                 <td>{{ conductor.nif }}</td>
             </tr>
             <tr>
-                <th>Fecha_alta</th>
-                <td>{{ conductor.fechaAlta ? conductor.fechaAlta|date('Y-m-d') : '' }}</td>
+                <th>{{ etiqueta_fecha_alta }}</th>
+                <td>{{ conductor.fechaAlta ? conductor.fechaAlta|date('d/m/Y') : '' }}</td>
             </tr>
             <tr>
-                <th>Fecha_baja</th>
-                <td>{{ conductor.fechaBaja ? conductor.fechaBaja|date('Y-m-d') : '' }}</td>
+                <th>{{ etiqueta_fecha_baja }}</th>
+                <td>{{ conductor.fechaBaja ? conductor.fechaBaja|date('d/m/Y') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_conductor_index') }}">back to list</a>
+{% endblock %}
 
-    <a href="{{ path('app_conductor_edit', {'id': conductor.id}) }}">edit</a>
+{% block acciones %}
+
+    <a href="{{ path('app_conductor_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
+
+    <a href="{{ path('app_conductor_edit', {'id': conductor.id}) }}" class="{{ estilo_boton_editar }}">{{ editar }}</a>
 
     {{ include('conductor/_delete_form.html.twig') }}
 {% endblock %}

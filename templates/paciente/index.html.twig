@@ -1,51 +1,52 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Paciente index{% endblock %}
+{% block title %}{{ navega_listado_pacientes }}{% endblock %}
 
-{% block body %}
-    <h1>Paciente index</h1>
+{% block cabecera %}
+    <h1>{{ navega_listado_pacientes }}</h1>
+{% endblock %}
 
-    <table class="table">
+{% block contenido %}
+    <table class="{{ estilo_tabla }}">
         <thead>
             <tr>
+<!--Nota: eliminar el campo id-->
                 <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido1</th>
-                <th>Apellido2</th>
-                <th>Email</th>
-                <th>Telefono</th>
-                <th>Telefono2</th>
-                <th>Dni</th>
-                <th>Es_socio</th>
-                <th>Codigo</th>
-                <th>actions</th>
+                <th>{{ etiqueta_nombre_completo_paciente }}</th>
+                <th>{{ etiqueta_email }}</th>
+                <th>{{ etiqueta_telefono1 }}</th>
+                <th>{{ etiqueta_telefono2 }}</th>
+                <th>{{ etiqueta_dni }}</th>
+                <th>{{ etiqueta_es_socio }}</th>
+                <th>{{ etiqueta_codigo_paciente }}</th>
+                <th>{{ etiqueta_acciones }}</th>
             </tr>
         </thead>
         <tbody>
         {% for paciente in pacientes %}
             <tr>
                 <td>{{ paciente.id }}</td>
-                <td>{{ paciente.nombre }}</td>
-                <td>{{ paciente.apellido1 }}</td>
-                <td>{{ paciente.apellido2 }}</td>
+                <td>{{ paciente.nombre }} {{ paciente.apellido1 }} {{ paciente.apellido2 }}</td>
                 <td>{{ paciente.email }}</td>
                 <td>{{ paciente.telefono }}</td>
                 <td>{{ paciente.telefono2 }}</td>
                 <td>{{ paciente.dni }}</td>
-                <td>{{ paciente.esSocio ? 'Yes' : 'No' }}</td>
+                <td>{{ paciente.esSocio ? booleano_si : booleano_no }}</td>
                 <td>{{ paciente.codigo }}</td>
                 <td>
-                    <a href="{{ path('app_paciente_show', {'id': paciente.id}) }}">show</a>
-                    <a href="{{ path('app_paciente_edit', {'id': paciente.id}) }}">edit</a>
+                    <a href="{{ path('app_paciente_show', {'id': paciente.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
+                    <a href="{{ path('app_paciente_edit', {'id': paciente.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="11">no records found</td>
+                <td colspan="9">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
 
-    <a href="{{ path('app_paciente_new') }}">Create new</a>
+{% block acciones %}
+    <a href="{{ path('app_paciente_new') }}" class="{{ estilo_boton_nuevo_elemento }}">{{ navega_nuevo_paciente }}</a>
 {% endblock %}

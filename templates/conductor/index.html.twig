@@ -1,45 +1,47 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Conductor index{% endblock %}
+{% block title %}{{ navega_listado_conductores }}{% endblock %}
 
-{% block body %}
-    <h1>Conductor index</h1>
+{% block cabecera %}
+    <h1>{{ navega_listado_conductores }}</h1>
+{% endblock %}
 
-    <table class="table">
+{% block contenido %}
+    <table class="{{ estilo_tabla }}">
         <thead>
             <tr>
+<!-- Nota: Eliminar el id -->
                 <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido1</th>
-                <th>Apellido2</th>
-                <th>Nif</th>
-                <th>Fecha_alta</th>
-                <th>Fecha_baja</th>
-                <th>actions</th>
+                <th>{{ etiqueta_nombre_completo_conductor }}</th>
+                <th>{{ etiqueta_nif_conductor }}</th>
+                <th>{{ etiqueta_fecha_alta }}</th>
+                <th>{{ etiqueta_fecha_baja }}</th>
+                <th>{{ etiqueta_acciones }}</th>
             </tr>
         </thead>
         <tbody>
         {% for conductor in conductors %}
             <tr>
                 <td>{{ conductor.id }}</td>
-                <td>{{ conductor.nombre }}</td>
-                <td>{{ conductor.apellido1 }}</td>
-                <td>{{ conductor.apellido2 }}</td>
+                <td>{{ conductor.nombre }} {{ conductor.apellido1 }} {{ conductor.apellido2 }}</td>
                 <td>{{ conductor.nif }}</td>
-                <td>{{ conductor.fechaAlta ? conductor.fechaAlta|date('Y-m-d') : '' }}</td>
-                <td>{{ conductor.fechaBaja ? conductor.fechaBaja|date('Y-m-d') : '' }}</td>
+                <td>{{ conductor.fechaAlta ? conductor.fechaAlta|date('d/m/Y') : '' }}</td>
+                <td>{{ conductor.fechaBaja ? conductor.fechaBaja|date('d/m/Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_conductor_show', {'id': conductor.id}) }}">show</a>
-                    <a href="{{ path('app_conductor_edit', {'id': conductor.id}) }}">edit</a>
+                    <a href="{{ path('app_conductor_show', {'id': conductor.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
+                    <a href="{{ path('app_conductor_edit', {'id': conductor.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="6">{{ sin_resultados }} conductores</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_conductor_new') }}">Create new</a>
+{% endblock %}
+
+{% block acciones %}
+    <a href="{{ path('app_conductor_new') }}" class="{{ estilo_boton_nuevo_elemento }}">{{ navega_nuevo_conductor }}</a>
 {% endblock %}

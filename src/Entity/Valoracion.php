@@ -7,4 +7,6 @@ enum Valoracion:string{
     case REGULAR="Regular";
     case MALA="Mala";
     case SIN_VALORACION="Sin valoración";
+
+
 }

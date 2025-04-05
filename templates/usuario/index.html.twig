@@ -1,20 +1,21 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Usuario index{% endblock %}
+{% block title %}{{ navega_listado_usuarios }}{% endblock %}
 
 {% block body %}
-    <h1>Usuario index</h1>
+    <h1>{{ navega_listado_usuarios }}</h1>
 
-    <table class="table">
+    <table class="{{ estilo_tabla }}">
         <thead>
+<!--Nota: Eliminar el id-->
             <tr>
                 <th>Id</th>
-                <th>Login</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Email</th>
-                <th>Es_admin</th>
-                <th>actions</th>
+                <th>{{ etiqueta_login }}</th>
+                <th>{{ etiqueta_rol_usuario }}</th>
+                <th>{{ etiqueta_password }}</th>
+                <th>{{ etiqueta_email }}</th>
+                <th>{{ etiqueta_es_admin }}</th>
+                <th>{{ etiqueta_acciones }}</th>
             </tr>
         </thead>
         <tbody>
@@ -25,19 +26,19 @@
                 <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
                 <td>{{ usuario.password }}</td>
                 <td>{{ usuario.email }}</td>
-                <td>{{ usuario.esAdmin ? 'Yes' : 'No' }}</td>
+                <td>{{ usuario.esAdmin ? booleano_si : booleano_no }}</td>
                 <td>
-                    <a href="{{ path('app_usuario_show', {'id': usuario.id}) }}">show</a>
-                    <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}">edit</a>
+                    <a href="{{ path('app_usuario_show', {'id': usuario.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
+                    <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_usuario_new') }}">Create new</a>
+    <a href="{{ path('app_usuario_new') }}" class="{{ estilo_boton_nuevo_elemento }}">{{ navega_nuevo_usuario }}</a>
 {% endblock %}

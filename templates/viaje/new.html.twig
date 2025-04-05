@@ -1,11 +1,11 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}New Viaje{% endblock %}
+{% block title %}{{ navega_nuevo_viaje }}{% endblock %}
 
 {% block body %}
-    <h1>Create new Viaje</h1>
+    <h1>{{ navega_nuevo_viaje }}</h1>
 
     {{ include('viaje/_form.html.twig') }}
 
-    <a href="{{ path('app_viaje_index') }}">back to list</a>
+    <a href="{{ path('app_viaje_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 {% endblock %}
