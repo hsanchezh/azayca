@@ -2,6 +2,8 @@ Esta es una aplicación web para el TFG "Aplicación para la gestión de traslad
 
 Se trata de una aplicación escrita en PHP con el framework Symfony. Como SGBD se utiliza postgresql. El entorno de desarrollo es una máquina con Debian 13 (Trixie) y el IDE PHPStorm.
 
+La base de datos se puede generar ejecutando el script .database.sql de la raíz del proyecto.
+
 El proyecto base se ha creado a través de composer:
   composer create-project symfony/skeleton:"7.2.x" azayca
 
