@@ -1,10 +1,9 @@
 body {
-    background-color: skyblue;
+
 }
 
 
 .menu-principal{
-    background-color: #fabada;
 }
 
 .menu-azayca a{
@@ -20,17 +19,20 @@ body {
     --color-fuente-azayca: black; /* #86186b; */
 }
 
-/* .menu ul {
-     list-style-type: none;
-     margin: 0;
-     padding: 0;
-     text-align: center;
- }
-
-.menu li {
-    display: inline;
+.boton-espacio-superior{
+    margin-top: 10px;
 }
 
-.menu a, .menu a:hover{
-    text-decoration: none;
-}*/
+/*
+.btn-primary {
+
+    background-color: #e91e63 !important;
+    border-color: #e91e63 !important;
+}
+
+.btn-primary:hover {
+    background-color: #d81b60 !important;
+    border-color: #d81b60 !important;
+}
+
+ */

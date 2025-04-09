@@ -48,8 +48,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Tarifas</a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-item"><a href="{{ path('app_tarifa_espera_index') }}" class="nav-link">{{ navega_ver_tarifa_espera }}</a></li>
-                                <li class="dropdown-item"><a href="{{ path('app_tarifa_km_index') }}" class="nav-link">{{ navega_ver_tarifa_km }}</a></li>
+                                <li class="dropdown-item"><a href="{{ path('app_tarifa_espera_actual') }}" class="nav-link">{{ navega_ver_tarifa_espera }}</a></li>
+                                <li class="dropdown-item"><a href="{{ path('app_tarifa_km_actual') }}" class="nav-link">{{ navega_ver_tarifa_km }}</a></li>
                             </ul>
                         </li>
 
@@ -82,13 +82,13 @@
 
 
 {% block body %}
-    <div>
+    <div class="{{ estilo_div_cabecera }}">
         {% block cabecera %}{% endblock %}
     </div>
-    <div class="container">
+    <div class="{{ estilo_div_contenido }}">
         {% block contenido %}{% endblock %}
     </div>
-    <div class="container">
+    <div class="{{ estilo_div_acciones }}">
         {% block acciones %}{% endblock %}
     </div>
 {% endblock %}

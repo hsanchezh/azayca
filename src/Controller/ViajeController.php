@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\TarifaEspera;
+use App\Entity\TarifaKm;
 use App\Entity\Viaje;
 use App\Form\ViajeType;
 use App\Repository\ViajeRepository;
@@ -25,20 +27,41 @@ final class ViajeController extends AbstractController
     #[Route('/new', name: 'app_viaje_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+
+        $tarifasEsperaRepository=$entityManager->getRepository(TarifaEspera::class);
+        $tarifasKmRepository=$entityManager->getRepository(TarifaKm::class);
+
+        $valoresTarifasEspera=$tarifasEsperaRepository->getJsonValues();
+        $valoresTarifasKm=$tarifasKmRepository->getJsonValues();
+
+        $tarifaEsperaActual=$tarifasEsperaRepository->findTarifaEsperaActual();
+        $tarifaKmActual=$tarifasKmRepository->findTarifaKmActual();
+
         $viaje = new Viaje();
+        $viaje->setIdTarifaEspera($tarifaEsperaActual);
+        $viaje->setIdTarifaKm($tarifaKmActual);
+
         $form = $this->createForm(ViajeType::class, $viaje);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $viaje->setImporteEspera(($viaje->getHorasEspera()?$viaje->getHorasEspera():0)*$viaje->getIdTarifaEspera()->getPrecioHora());
+            $viaje->setImporteDistancia($viaje->getNumKilometros()*$viaje->getIdTarifaKm()->getPrecioKm());
+            $viaje->setImporteTotal($viaje->getImporteDistancia()+$viaje->getImporteEspera());
+            $viaje->setIdLocalidad($viaje->getIdPaciente()->getIdLocalidad());
+
             $entityManager->persist($viaje);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_viaje_index', [], Response::HTTP_SEE_OTHER);
         }
 
+
         return $this->render('viaje/new.html.twig', [
             'viaje' => $viaje,
             'form' => $form,
+            'valoresTarifasEspera'=>$valoresTarifasEspera,
+            'valoresTarifasKm'=>$valoresTarifasKm,
         ]);
     }
 
@@ -56,7 +79,18 @@ final class ViajeController extends AbstractController
         $form = $this->createForm(ViajeType::class, $viaje);
         $form->handleRequest($request);
 
+        $tarifasEsperaRepository=$entityManager->getRepository(TarifaEspera::class);
+        $tarifasKmRepository=$entityManager->getRepository(TarifaKm::class);
+
+        $valoresTarifasEspera=$tarifasEsperaRepository->getJsonValues();
+        $valoresTarifasKm=$tarifasKmRepository->getJsonValues();
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $viaje->setImporteEspera(($viaje->getHorasEspera()?$viaje->getHorasEspera():0)*$viaje->getIdTarifaEspera()->getPrecioHora());
+            $viaje->setImporteDistancia($viaje->getNumKilometros()*$viaje->getIdTarifaKm()->getPrecioKm());
+            $viaje->setImporteTotal($viaje->getImporteDistancia()+$viaje->getImporteEspera());
+            $viaje->setIdLocalidad($viaje->getIdPaciente()->getIdLocalidad());
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_viaje_index', [], Response::HTTP_SEE_OTHER);
@@ -65,6 +99,8 @@ final class ViajeController extends AbstractController
         return $this->render('viaje/edit.html.twig', [
             'viaje' => $viaje,
             'form' => $form,
+            'valoresTarifasEspera'=>$valoresTarifasEspera,
+            'valoresTarifasKm'=>$valoresTarifasKm,
         ]);
     }
 

@@ -70,4 +70,12 @@ class TarifaEspera
 
         return $this;
     }
+
+    public function getNombreTarifa(): string{
+        if($this->fin_vigencia==null){
+            return "Tarifa vigente";
+        }
+        return $this->inicio_vigencia->format("d/m/Y").' - '.$this->fin_vigencia->format("d/m/Y");
+    }
+
 }

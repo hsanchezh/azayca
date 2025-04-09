@@ -218,4 +218,12 @@ class Paciente
 
         return $this;
     }
+
+    public function generarCodigo(){
+        $this->codigo = bin2hex(random_bytes(4));
+    }
+
+    public function getNombreCompleto(): string{
+        return $this->nombre . ' ' . $this->apellido1.(($this->apellido2)?$this->apellido2:'');
+    }
 }

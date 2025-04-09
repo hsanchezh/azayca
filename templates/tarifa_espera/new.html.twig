@@ -3,11 +3,29 @@
 {% block title %}{{ navega_nueva_tarifa_espera }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_nueva_tarifa_espera }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_nueva_tarifa_espera }}</h3>
 {% endblock %}
 
 {% block contenido %}
     {{ include('tarifa_espera/_form.html.twig') }}
+
+    {% if(not tarifa_actual|default) %}
+        <h5>{{ etiqueta_tarifa_no_definida }}</h5>
+    {% else %}
+        <h5>{{ etiqueta_tarifa_espera_actual }}</h5>
+        <table class="{{ estilo_tabla }}">
+            <tbody>
+            <tr>
+                <th>{{ etiqueta_inicio_vigencia }}</th>
+                <td>{{ tarifa_actual.inicioVigencia|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>{{ etiqueta_precio_hora }}</th>
+                <td>{{ tarifa_actual.precioHora }}</td>
+            </tr>
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}
 
 {% block acciones %}

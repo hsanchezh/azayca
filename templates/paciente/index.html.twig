@@ -3,15 +3,13 @@
 {% block title %}{{ navega_listado_pacientes }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_listado_pacientes }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_listado_pacientes }}</h3>
 {% endblock %}
 
 {% block contenido %}
     <table class="{{ estilo_tabla }}">
         <thead>
             <tr>
-<!--Nota: eliminar el campo id-->
-                <th>Id</th>
                 <th>{{ etiqueta_nombre_completo_paciente }}</th>
                 <th>{{ etiqueta_email }}</th>
                 <th>{{ etiqueta_telefono1 }}</th>
@@ -25,7 +23,6 @@
         <tbody>
         {% for paciente in pacientes %}
             <tr>
-                <td>{{ paciente.id }}</td>
                 <td>{{ paciente.nombre }} {{ paciente.apellido1 }} {{ paciente.apellido2 }}</td>
                 <td>{{ paciente.email }}</td>
                 <td>{{ paciente.telefono }}</td>
@@ -40,7 +37,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">{{ sin_resultados }}</td>
+                <td colspan="8">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>

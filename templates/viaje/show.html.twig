@@ -2,54 +2,58 @@
 
 {% block title %}{{ navega_detalle_viaje }}{% endblock %}
 
-{% block body %}
-    <h1>{{ navega_detalle_viaje }}</h1>
+{% block cabecera %}
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_detalle_viaje }}</h3>
+
+{% endblock %}
+
+{% block contenido %}
 
     <table class="{{ estilo_tabla }}">
         <tbody>
-<!--Nota: Quitar id-->
-            <tr>
-                <th>Id</th>
-                <td>{{ viaje.id }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_fecha }}</th>
-                <td>{{ viaje.fecha ? viaje.fecha|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_es_ida_y_vuelta }}</th>
-                <td>{{ viaje.esIdaVuelta ? booleano_si : booleano_no }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_valoracion_viaje }}</th>
-                <td>{{ viaje.valoracion.value }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_comentarios_viaje }}</th>
-                <td>{{ viaje.comentarios }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_kilometros }}</th>
-                <td>{{ viaje.numKilometros }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_importe_kilometros }}</th>
-                <td>{{ viaje.importeDistancia }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_espera }}</th>
-                <td>{{ viaje.horasEspera }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_importe_espera }}</th>
-                <td>{{ viaje.importeEspera }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_importe_total }}</th>
-                <td>{{ viaje.importeTotal }}</td>
-            </tr>
+        <tr>
+            <th>{{ etiqueta_fecha }}</th>
+            <td>{{ viaje.fecha ? viaje.fecha|date('d-m-Y') : '' }}</td>
+        </tr>
+        <tr>
+            <th>{{ etiqueta_es_ida_y_vuelta }}</th>
+            <td>{{ viaje.esIdaVuelta ? booleano_si : booleano_no }}</td>
+        </tr>
+        <tr>
+            <th>{{ etiqueta_valoracion_viaje }}</th>
+            <td>{{ viaje.valoracion.value }}</td>
+        </tr>
+        <tr>
+            <th>{{ etiqueta_comentarios_viaje }}</th>
+            <td>{{ viaje.comentarios }}</td>
+        </tr>
+        <tr>
+            <th>{{ etiqueta_kilometros }}</th>
+            <td>{{ viaje.numKilometros }}</td>
+        </tr>
+        <tr>
+            <th>{{ etiqueta_importe_kilometros }}</th>
+            <td>{{ viaje.importeDistancia }}</td>
+        </tr>
+        <tr>
+            <th>{{ etiqueta_espera }}</th>
+            <td>{{ viaje.horasEspera }}</td>
+        </tr>
+        <tr>
+            <th>{{ etiqueta_importe_espera }}</th>
+            <td>{{ viaje.importeEspera }}</td>
+        </tr>
+        <tr>
+            <th>{{ etiqueta_importe_total }}</th>
+            <td>{{ viaje.importeTotal }}</td>
+        </tr>
         </tbody>
     </table>
+
+
+{% endblock %}
+
+{% block acciones %}
 
     <a href="{{ path('app_viaje_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 

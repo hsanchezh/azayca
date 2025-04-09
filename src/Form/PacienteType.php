@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\Localidad;
 use App\Entity\Paciente;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,26 +17,50 @@ class PacienteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre')
-            ->add('apellido1')
-            ->add('apellido2')
-            ->add('email')
-            ->add('telefono')
-            ->add('telefono2')
-            ->add('dni')
-            ->add('es_socio')
-            ->add('codigo')
+            ->add('nombre', null, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('apellido1', null, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('apellido2', null, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('email', null, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('telefono', null, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('telefono2', null, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('dni', null, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('es_socio', null, [
+                'attr' => ['class' => 'form-control'],
+            ])
             ->add('id_localidad', EntityType::class, [
                 'class' => Localidad::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nombre',
+                'attr' => ['class' => 'form-select'],
             ])
         ;
+
+        if ($options['include_codigo']) {
+            $builder->add('codigo', null, [
+                'attr' => ['class' => 'form-control'],
+            ]);
+        }
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Paciente::class,
+            'include_codigo' => true,
         ]);
     }
 }

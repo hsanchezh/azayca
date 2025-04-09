@@ -3,15 +3,25 @@
 {% block title %}{{ navega_editar_tarifa_espera }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_editar_tarifa_espera }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_editar_tarifa_espera }}</h3>
 {% endblock %}
 
 {% block contenido %}
     {{ include('tarifa_espera/_form.html.twig', {'button_label': actualizar}) }}
+
+    <h5>{{ navega_modifica_viajes_con_esta_tarifa }}</h5>
+    <div class="{{ estilo_subcontenido }}">
+        {{ include('viaje/_tabla_viajes.html.twig') }}
+    </div>
+
 {% endblock %}
 
 {% block acciones %}
     <a href="{{ path('app_tarifa_espera_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 
-    {{ include('tarifa_espera/_delete_form.html.twig') }}
+    {# No se puede eliminar una tarifa
+        {% if not viajes %}
+            {{ include('tarifa_espera/_delete_form.html.twig') }}
+        {% endif %}
+    #}
 {% endblock %}

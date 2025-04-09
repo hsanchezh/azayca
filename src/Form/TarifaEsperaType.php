@@ -12,20 +12,31 @@ class TarifaEsperaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('inicio_vigencia', null, [
+            ->add('precio_hora', null, [
+                'attr' => ['class' => 'form-control'],
+            ]);
+
+        if ($options['include_inicio_vigencia']) {
+            $builder->add('inicio_vigencia', null, [
                 'widget' => 'single_text',
-            ])
-            ->add('fin_vigencia', null, [
+                'attr' => ['class' => 'form-control'],
+            ]);
+        }
+
+        if ($options['include_fin_vigencia']) {
+            $builder->add('fin_vigencia', null, [
                 'widget' => 'single_text',
-            ])
-            ->add('precio_hora')
-        ;
+                'attr' => ['class' => 'form-control'],
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => TarifaEspera::class,
+            'include_inicio_vigencia' => true,
+            'include_fin_vigencia' => false,
         ]);
     }
 }

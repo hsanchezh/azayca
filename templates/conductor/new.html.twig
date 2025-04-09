@@ -3,9 +3,7 @@
 {% block title %}{{ navega_nuevo_conductor }}{% endblock %}
 
 {% block cabecera %}
-    <h1>
-        {{ navega_nuevo_conductor }}
-    </h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_nuevo_conductor }}</h3>
 {% endblock %}
 
 {% block contenido %}
@@ -13,5 +11,5 @@
 {% endblock %}
 
 {% block acciones %}
-    <a href="{{ path('app_conductor_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }} de conductores</a>
+    <a href="{{ path('app_conductor_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 {% endblock %}

@@ -1,4 +1,11 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+    {% if(valoresTarifasEspera|default) %}
+        <input type="hidden" id="tarifas_espera" value="{{ valoresTarifasEspera }}">
+        <input type="hidden" id="tarifas_km" value="{{ valoresTarifasKm }}">
+    {% endif %}
+    <label for="total">Importe total</label>
+    <input type="text" id="total" value="0" disabled/>
+    <br>
     <button class="{{ estilo_boton_guardar }}">{{ button_label|default(guardar) }}</button>
 {{ form_end(form) }}

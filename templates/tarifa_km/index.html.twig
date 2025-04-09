@@ -3,15 +3,13 @@
 {% block title %}{{ navega_listado_tarifa_km }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_listado_tarifa_km }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_listado_tarifa_km }}</h3>
 {% endblock %}
 
 {% block contenido %}
     <table class="{{ estilo_tabla }}">
         <thead>
             <tr>
-<!--Nota: Quitar id-->
-                <th>Id</th>
                 <th>{{ etiqueta_inicio_vigencia }}</th>
                 <th>{{ etiqueta_fin_vigencia }}</th>
                 <th>{{ etiqueta_precio_km }}</th>
@@ -21,7 +19,6 @@
         <tbody>
         {% for tarifa_km in tarifa_kms %}
             <tr>
-                <td>{{ tarifa_km.id }}</td>
                 <td>{{ tarifa_km.inicioVigencia ? tarifa_km.inicioVigencia|date('d-m-Y') : '' }}</td>
                 <td>{{ tarifa_km.finVigencia ? tarifa_km.finVigencia|date('d-m-Y') : '' }}</td>
                 <td>{{ tarifa_km.precioKm }}</td>
@@ -32,7 +29,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">{{ sin_resultados }}</td>
+                <td colspan="4">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>

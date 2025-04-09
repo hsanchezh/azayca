@@ -26,10 +26,11 @@ final class PacienteController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $paciente = new Paciente();
-        $form = $this->createForm(PacienteType::class, $paciente);
+        $form = $this->createForm(PacienteType::class, $paciente, ['include_codigo'=>false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $paciente->generarCodigo();
             $entityManager->persist($paciente);
             $entityManager->flush();
 

@@ -3,17 +3,12 @@
 {% block title %}{{ navega_detalle_paciente }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_detalle_paciente }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_detalle_paciente }}</h3>
 {% endblock %}
 
 {% block contenido %}
     <table class="{{ estilo_tabla }}">
         <tbody>
-<!-- Nota: Borrar el campo id -->
-            <tr>
-                <th>Id</th>
-                <td>{{ paciente.id }}</td>
-            </tr>
             <tr>
                 <th>{{ etiqueta_nombre }}</th>
                 <td>{{ paciente.nombre }}</td>
@@ -25,6 +20,10 @@
             <tr>
                 <th>{{ etiqueta_apellido2 }}</th>
                 <td>{{ paciente.apellido2 }}</td>
+            </tr>
+            <tr>
+                <th>{{ etiqueta_nombre_localidad }}</th>
+                <td>{{ paciente.idLocalidad.nombre }}</td>
             </tr>
             <tr>
                 <th>{{ etiqueta_email }}</th>

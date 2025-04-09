@@ -21,7 +21,12 @@ twig:
         
 
 #opciones, navegacion y titulos
+        navega_inicio_demostracion: 'Página de inicio de la demostración'
         navega_inicio: 'Inicio'
+        
+        navega_login: 'Acceso a la aplicación'
+        navega_bienvenida: 'Gestión de traslados de pacientes AZAYCA'
+        navega_bienvenida_cabecera: 'Aplicación para la gestión de traslados de pacientes de la ONG AZAYCA'
         
         navega_ver_conductores: 'Ver conductores'
         navega_nuevo_conductor: 'Nuevo conductor'
@@ -45,13 +50,17 @@ twig:
         navega_nueva_tarifa_espera: 'Nueva tarifa de espera'
         navega_detalle_tarifa_espera: 'Detalle de la tarifa de espera'
         navega_editar_tarifa_espera: 'Editar tarifa de espera'
-        navega_listado_tarifa_espera: 'Listado de tarifas de espera'
+        navega_listado_tarifa_espera: 'Histórico de tarifas de espera'
+        navega_viajes_con_esta_tarifa: 'Listado de viajes realizados con esta tarifa'
+        navega_modifica_viajes_con_esta_tarifa: 'Modificar esta tarifa alterará todos los viajes que se realizaron con ella'
+        navega_ver_historico_tarifas_espera: 'Ver el histórico de tarifas de espera'
 
         navega_ver_tarifa_km: 'Ver tarifa por km'
         navega_nueva_tarifa_km: 'Nueva tarifa por km'
         navega_detalle_tarifa_km: 'Detalle de la tarifa por km'
         navega_editar_tarifa_km: 'Editar tarifa por km'
-        navega_listado_tarifa_km: 'Listado de tarifas por km'
+        navega_listado_tarifa_km: 'Histórico de tarifas por km'
+        navega_ver_historico_tarifas_km: 'Ver el histórico de tarifas por km'
         
         
         navega_ver_viajes: 'Ver viajes'
@@ -65,8 +74,9 @@ twig:
         navega_detalle_usuario: 'Detalle del usuario'
         navega_editar_usuario: 'Editar usuario'
         navega_listado_usuarios: 'Listado de usuarios'
-        
-# etiquetas datos comunes    
+
+
+# etiquetas datos comunes
         etiqueta_nombre: 'Nombre'
         etiqueta_apellido1: 'Apellido 1'
         etiqueta_apellido2: 'Apellido 2'
@@ -80,6 +90,10 @@ twig:
         etiqueta_dni: 'DNI'
         etiqueta_es_socio: 'Es socio'
         etiqueta_codigo_paciente: 'Código'
+        
+# login
+        etiqueta_introduzca_datos_acceso: 'Por favor, introduzca los datos de acceso'
+        etiqueta_acceder: 'Acceder'
         
 # conductor
         etiqueta_nombre_completo_conductor: 'Conductor'
@@ -105,25 +119,36 @@ twig:
         etiqueta_importe_kilometros: 'Importe distancia'
         etiqueta_espera: 'Espera'
         etiqueta_importe_espera: 'Importe espera'
-        etiqueta_importe_total: 'Total'
+        etiqueta_importe_total: 'Importe total'
+        etiqueta_destino: 'Destino'
         
 # tarifas
         etiqueta_inicio_vigencia: 'Inicio de la vigencia'        
         etiqueta_fin_vigencia: 'Fin de la vigencia'        
         etiqueta_precio_hora: 'Precio por hora'
         etiqueta_precio_km: 'Precio por kilómetro'
+        etiqueta_tarifa_espera_actual: 'Tarifa de espera actual'
+        etiqueta_tarifa_no_definida: 'Tarifa actual no definida'
         
         
 # estilos
-        estilo_tabla: 'table table-striped'
-        estilo_boton_eliminar: 'btn btn-primary'
-        estilo_boton_guardar: 'btn btn-primary'
-        estilo_boton_detalle: 'btn btn-primary'
+        estilo_div_cabecera: 'container text-center py-4 mb-5 border-bottom'
+        estilo_div_contenido: 'container'
+        estilo_div_acciones: 'container'
+        estilo_cabecera_pagina: 'text-dark'
+        estilo_div_tabla: 'table-responsive-md'
+        estilo_tabla: 'table table-striped table-hover'
+        estilo_boton_login : 'btn btn-primary boton-espacio-superior'
+        estilo_boton_eliminar: 'btn btn-primary boton-espacio-superior'
+        estilo_boton_guardar: 'btn btn-primary boton-espacio-superior'
+        estilo_boton_detalle: 'btn btn-primary boton-espacio-superior'
         estilo_boton_detalle_incrustado: 'btn btn-outline-secondary'
-        estilo_boton_editar: 'btn btn-primary'
+        estilo_boton_editar: 'btn btn-primary boton-espacio-superior'
         estilo_boton_editar_incrustado: 'btn btn-outline-secondary'
-        estilo_boton_nuevo_elemento: 'btn btn-primary'
-        estilo_boton_volver: 'btn btn-primary'
+        estilo_boton_nuevo_elemento: 'btn btn-primary boton-espacio-superior'
+        estilo_boton_volver: 'btn btn-primary boton-espacio-superior'
+        estilo_grupo_botones: 'd-grid gap-3 d-md-block'
+        estilo_subcontenido: 'container'
 
                 
 

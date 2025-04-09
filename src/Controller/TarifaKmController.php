@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\TarifaKm;
+use App\Entity\Viaje;
 use App\Form\TarifaKmType;
 use App\Repository\TarifaKmRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +20,25 @@ final class TarifaKmController extends AbstractController
     public function index(TarifaKmRepository $tarifaKmRepository): Response
     {
         return $this->render('tarifa_km/index.html.twig', [
-            'tarifa_kms' => $tarifaKmRepository->findAll(),
+            'tarifa_kms' => $tarifaKmRepository->findAllByInicioVigencia(),
+        ]);
+    }
+
+    #[Route('/actual', name: 'app_tarifa_km_actual', methods: ['GET'])]
+    public function verActual(Request $request, TarifaKmRepository $tarifaKmRepository, EntityManagerInterface $manager): Response
+    {
+        $tarifaKmActual=$tarifaKmRepository->findTarifaKmActual();
+        if($tarifaKmActual){
+            return $this->show($tarifaKmActual, $manager, true);
+        }
+
+        $tarifaKm = new TarifaKm();
+        $form = $this->createForm(TarifaKmType::class, $tarifaKm);
+        $form->handleRequest($request);
+
+        return $this->render('tarifa_km/new.html.twig', [
+            'tarifa_km' => $tarifaKm,
+            'form' => $form,
         ]);
     }
 
@@ -29,31 +49,51 @@ final class TarifaKmController extends AbstractController
         $form = $this->createForm(TarifaKmType::class, $tarifaKm);
         $form->handleRequest($request);
 
+        $tarifaKmRepository=$entityManager->getRepository(TarifaKm::class);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->get('id_tarifa_actual')) {
+                $tarifaAnterior = $tarifaKmRepository->findOneBy(['id' => $request->get('id_tarifa_actual')]);
+                $fechaFinalizacion=DateTime::createFromInterface($tarifaKm->getInicioVigencia());
+                $fechaFinalizacion->sub(new \DateInterval('P1D'));
+                $tarifaAnterior->setFinVigencia($fechaFinalizacion);
+                $entityManager->persist($tarifaAnterior);
+            }
+
             $entityManager->persist($tarifaKm);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_tarifa_km_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $tarifaActual=$tarifaKmRepository->findTarifaKmActual();
+
         return $this->render('tarifa_km/new.html.twig', [
             'tarifa_km' => $tarifaKm,
             'form' => $form,
+            'tarifa_actual'=>$tarifaActual,
         ]);
     }
 
     #[Route('/{id}', name: 'app_tarifa_km_show', methods: ['GET'])]
-    public function show(TarifaKm $tarifaKm): Response
+    public function show(TarifaKm $tarifaKm, EntityManagerInterface $manager, $incrustada=false): Response
     {
+        $viajesRepository=$manager->getRepository(Viaje::class);
+
+        /** @var Viaje[] $viajes */
+        $viajes=$viajesRepository->findByTarifaKmField($tarifaKm->getId());
+
         return $this->render('tarifa_km/show.html.twig', [
             'tarifa_km' => $tarifaKm,
+            'viajes' => $viajes,
+            'incrustada' => $incrustada,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_tarifa_km_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, TarifaKm $tarifaKm, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, TarifaKm $tarifaKm, EntityManagerInterface $entityManager, $incrustada=false): Response
     {
-        $form = $this->createForm(TarifaKmType::class, $tarifaKm);
+        $form = $this->createForm(TarifaKmType::class, $tarifaKm, ['include_inicio_vigencia'=>false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,9 +102,16 @@ final class TarifaKmController extends AbstractController
             return $this->redirectToRoute('app_tarifa_km_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $viajesRepository=$entityManager->getRepository(Viaje::class);
+
+        /** @var Viaje[] $viajes */
+        $viajes=$viajesRepository->findByTarifaKmField($tarifaKm->getId());
+
         return $this->render('tarifa_km/edit.html.twig', [
             'tarifa_km' => $tarifaKm,
             'form' => $form,
+            'viajes' => $viajes,
+            'incrustada' => $incrustada,
         ]);
     }
 

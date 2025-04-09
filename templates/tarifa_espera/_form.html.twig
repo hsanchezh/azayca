@@ -1,4 +1,7 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
     <button class="{{ estilo_boton_guardar }}">{{ button_label|default(guardar) }}</button>
+    {% if tarifa_actual|default %}
+        <input type="hidden" name="id_tarifa_actual" value="{{ tarifa_actual.id }}">
+    {% endif %}
 {{ form_end(form) }}

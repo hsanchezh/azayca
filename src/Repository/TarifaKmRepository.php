@@ -40,4 +40,28 @@ class TarifaKmRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findTarifaKmActual(): ?TarifaKm
+    {
+        return $this->findOneBy(['fin_vigencia'=>null]);
+    }
+
+    public function findAllByInicioVigencia(): ?array
+    {
+        return $this->findBy([], ['inicio_vigencia'=>'ASC']);
+    }
+
+    public function getJsonValues(): ?string{
+        $consulta = $this->createQueryBuilder('t')
+            ->select(['t.id', 't.precio_km'])
+            ->getQuery()
+            ->getArrayResult();
+
+        $resultados = [];
+
+        foreach ($consulta as $valor){
+            $resultados[$valor['id']] = $valor['precio_km'];
+        }
+
+        return json_encode($resultados);
+    }
 }

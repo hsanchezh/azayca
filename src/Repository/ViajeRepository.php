@@ -40,4 +40,26 @@ class ViajeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByTarifaEsperaField($value): array
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.id_tarifa_espera = :val')
+            ->setParameter('val', $value)
+            ->orderBy('v.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByTarifaKmField($value): array
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.id_tarifa_km = :val')
+            ->setParameter('val', $value)
+            ->orderBy('v.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

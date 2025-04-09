@@ -3,17 +3,12 @@
 {% block title %}{{ navega_ver_tarifa_espera }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_ver_tarifa_espera }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_ver_tarifa_espera }}</h3>
 {% endblock %}
 
 {% block contenido %}
     <table class="{{ estilo_tabla }}">
         <tbody>
-<!--Nota: eliminar campo id-->
-            <tr>
-                <th>Id</th>
-                <td>{{ tarifa_espera.id }}</td>
-            </tr>
             <tr>
                 <th>{{ etiqueta_inicio_vigencia }}</th>
                 <td>{{ tarifa_espera.inicioVigencia ? tarifa_espera.inicioVigencia|date('d-m-Y') : '' }}</td>
@@ -28,12 +23,23 @@
             </tr>
         </tbody>
     </table>
+
+    <h5>{{ navega_viajes_con_esta_tarifa }}</h5>
+    <div class="{{ estilo_subcontenido }}">
+        {{ include('viaje/_tabla_viajes.html.twig') }}
+    </div>
 {% endblock %}
 
 {% block acciones %}
-    <a href="{{ path('app_tarifa_espera_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
+    <a href="{{ path('app_tarifa_espera_index') }}" class="{{ estilo_boton_volver }}">{{ navega_ver_historico_tarifas_espera }}</a>
 
     <a href="{{ path('app_tarifa_espera_edit', {'id': tarifa_espera.id}) }}" class="{{ estilo_boton_editar }}">{{ editar }}</a>
 
-    {{ include('tarifa_espera/_delete_form.html.twig') }}
+    <a href="{{ path('app_tarifa_espera_new') }}" class="{{ estilo_boton_nuevo_elemento }}">{{ navega_nueva_tarifa_espera }}</a>
+
+    {# No se contempla la opción de eliminar tarifas
+    {% if not viajes %}
+        {{ include('tarifa_espera/_delete_form.html.twig') }}
+    {% endif %}
+    #}
 {% endblock %}

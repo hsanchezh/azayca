@@ -2,51 +2,14 @@
 
 {% block title %}{{ navega_listado_viajes }}{% endblock %}
 
-{% block body %}
-    <h1>{{ navega_listado_viajes }}</h1>
+{% block cabecera %}
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_listado_viajes }}</h3>
+{% endblock %}
 
-    <table class="{{ estilo_tabla }}">
-        <thead>
-<!--Nota: Eliminar el id-->
-            <tr>
-                <th>Id</th>
-                <th>{{ etiqueta_fecha }}</th>
-                <th>{{ etiqueta_es_ida_y_vuelta }}</th>
-                <th>{{ etiqueta_valoracion_viaje }}</th>
-                <th>{{ etiqueta_valoracion_viaje }}</th>
-                <th>{{ etiqueta_kilometros }}</th>
-                <th>{{ etiqueta_importe_kilometros }}</th>
-                <th>{{ etiqueta_espera }}</th>
-                <th>{{ etiqueta_importe_espera }}</th>
-                <th>{{ etiqueta_importe_total }}</th>
-                <th>{{ etiqueta_acciones }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for viaje in viajes %}
-            <tr>
-                <td>{{ viaje.id }}</td>
-                <td>{{ viaje.fecha ? viaje.fecha|date('d-m-Y') : '' }}</td>
-                <td>{{ viaje.esIdaVuelta ? booleano_si : booleano_no }}</td>
-                <td>{{ viaje.valoracion.value }}</td>
-                <td>{{ viaje.comentarios }}</td>
-                <td>{{ viaje.numKilometros }}</td>
-                <td>{{ viaje.importeDistancia }}</td>
-                <td>{{ viaje.horasEspera }}</td>
-                <td>{{ viaje.importeEspera }}</td>
-                <td>{{ viaje.importeTotal }}</td>
-                <td>
-                    <a href="{{ path('app_viaje_show', {'id': viaje.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
-                    <a href="{{ path('app_viaje_edit', {'id': viaje.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">{{ sin_resultados }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block contenido %}
+    {% include('viaje/_tabla_viajes.html.twig') %}
+{% endblock %}
 
+{% block acciones %}
     <a href="{{ path('app_viaje_new') }}" class="{{ estilo_boton_nuevo_elemento }}">{{ navega_nuevo_viaje }}</a>
 {% endblock %}

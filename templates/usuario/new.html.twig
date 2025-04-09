@@ -2,10 +2,14 @@
 
 {% block title %}{{ navega_nuevo_usuario }}{% endblock %}
 
-{% block body %}
-    <h1>{{ navega_nuevo_usuario }}</h1>
+{% block cabecera %}
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_nuevo_usuario }}</h3>
+{% endblock %}
 
+{% block contenido %}
     {{ include('usuario/_form.html.twig') }}
+{% endblock %}
 
+{% block acciones %}
     <a href="{{ path('app_usuario_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 {% endblock %}

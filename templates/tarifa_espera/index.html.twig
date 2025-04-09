@@ -3,15 +3,13 @@
 {% block title %}{{ navega_listado_tarifa_espera }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_listado_tarifa_espera }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_listado_tarifa_espera }}</h3>
 {% endblock %}
 
 {% block contenido %}
     <table class="{{ estilo_tabla }}">
         <thead>
-<!--Nota: Eliminar el id-->
             <tr>
-                <th>Id</th>
                 <th>{{ etiqueta_inicio_vigencia }}</th>
                 <th>{{ etiqueta_fin_vigencia }}</th>
                 <th>{{ etiqueta_precio_hora }}</th>
@@ -21,7 +19,6 @@
         <tbody>
         {% for tarifa_espera in tarifa_esperas %}
             <tr>
-                <td>{{ tarifa_espera.id }}</td>
                 <td>{{ tarifa_espera.inicioVigencia ? tarifa_espera.inicioVigencia|date('Y-m-d') : '' }}</td>
                 <td>{{ tarifa_espera.finVigencia ? tarifa_espera.finVigencia|date('Y-m-d') : '' }}</td>
                 <td>{{ tarifa_espera.precioHora }}</td>
@@ -32,7 +29,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">{{ sin_resultados }}</td>
+                <td colspan="4">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>

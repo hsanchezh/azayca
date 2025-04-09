@@ -3,15 +3,13 @@
 {% block title %}{{ navega_listado_conductores }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_listado_conductores }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_listado_conductores }}</h3>
 {% endblock %}
 
 {% block contenido %}
     <table class="{{ estilo_tabla }}">
         <thead>
             <tr>
-<!-- Nota: Eliminar el id -->
-                <th>Id</th>
                 <th>{{ etiqueta_nombre_completo_conductor }}</th>
                 <th>{{ etiqueta_nif_conductor }}</th>
                 <th>{{ etiqueta_fecha_alta }}</th>
@@ -22,8 +20,7 @@
         <tbody>
         {% for conductor in conductors %}
             <tr>
-                <td>{{ conductor.id }}</td>
-                <td>{{ conductor.nombre }} {{ conductor.apellido1 }} {{ conductor.apellido2 }}</td>
+                <td>{{ conductor.nombreCompleto }}</td>
                 <td>{{ conductor.nif }}</td>
                 <td>{{ conductor.fechaAlta ? conductor.fechaAlta|date('d/m/Y') : '' }}</td>
                 <td>{{ conductor.fechaBaja ? conductor.fechaBaja|date('d/m/Y') : '' }}</td>
@@ -34,7 +31,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">{{ sin_resultados }} conductores</td>
+                <td colspan="5">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>

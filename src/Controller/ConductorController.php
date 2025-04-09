@@ -26,7 +26,8 @@ final class ConductorController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $conductor = new Conductor();
-        $form = $this->createForm(ConductorType::class, $conductor);
+        $form = $this->createForm(ConductorType::class, $conductor, ['include_fecha_baja' => false]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

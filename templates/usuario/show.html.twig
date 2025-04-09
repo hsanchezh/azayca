@@ -2,27 +2,16 @@
 
 {% block title %}{{ navega_detalle_usuario }}{% endblock %}
 
-{% block body %}
-    <h1>{{ navega_detalle_usuario }}</h1>
+{% block cabecera %}
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_detalle_usuario }}</h3>
+{% endblock %}
 
+{% block contenido %}
     <table class="{{ estilo_tabla }}">
         <tbody>
-<!--Nota: Eliminar campo id-->
-            <tr>
-                <th>Id</th>
-                <td>{{ usuario.id }}</td>
-            </tr>
             <tr>
                 <th>{{ etiqueta_login }}</th>
                 <td>{{ usuario.login }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_rol_usuario }}</th>
-                <td>{{ usuario.roles ? usuario.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>{{ etiqueta_password }}</th>
-                <td>{{ usuario.password }}</td>
             </tr>
             <tr>
                 <th>{{ etiqueta_email }}</th>
@@ -34,7 +23,9 @@
             </tr>
         </tbody>
     </table>
+{% endblock %}
 
+{% block acciones %}
     <a href="{{ path('app_usuario_index') }}" class="{{ estilo_boton_volver }}">{{ volver_al_listado }}</a>
 
     <a href="{{ path('app_usuario_edit', {'id': usuario.id}) }}" class="{{ estilo_boton_editar }}">{{ editar }}</a>

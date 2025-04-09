@@ -3,17 +3,12 @@
 {% block title %}{{ navega_detalle_localidad }}{% endblock %}
 
 {% block cabecera %}
-    <h1>{{ navega_detalle_localidad }}</h1>
+    <h3 class="{{ estilo_cabecera_pagina }}">{{ navega_detalle_localidad }}</h3>
 {% endblock %}
 
 {% block contenido %}
     <table class="{{ estilo_tabla }}">
         <tbody>
-<!--Nota: Eliminar campo id -->
-            <tr>
-                <th>Id</th>
-                <td>{{ localidad.id }}</td>
-            </tr>
             <tr>
                 <th>{{ etiqueta_nombre_localidad }}</th>
                 <td>{{ localidad.nombre }}</td>

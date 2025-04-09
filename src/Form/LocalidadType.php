@@ -12,8 +12,9 @@ class LocalidadType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre')
-        ;
+            ->add('nombre', null, [
+                'attr' => ['class' => 'form-control'],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

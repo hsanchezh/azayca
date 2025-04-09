@@ -1,0 +1,41 @@
+{% set numCols=8 %}
+<table class="{{ estilo_tabla }}">
+    <thead>
+    <tr>
+        <th>{{ etiqueta_fecha }}</th>
+        <th>{{ etiqueta_nombre_completo_paciente }}</th>
+        <th>{{ etiqueta_valoracion_viaje }}</th>
+        <th>{{ etiqueta_comentarios_viaje }}</th>
+        <th>{{ etiqueta_destino }}</th>
+        <th>{{ etiqueta_kilometros }}</th>
+        <th>{{ etiqueta_importe_total }}</th>
+        {% if not incrustada|default %}
+            {% set numCols=numCols+1 %}
+            <th>{{ etiqueta_acciones }}</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for viaje in viajes %}
+        <tr>
+            <td>{{ viaje.fecha ? viaje.fecha|date('d-m-Y') : '' }}</td>
+            <td>{{ viaje.idPaciente.nombreCompleto }}</td>
+            <td>{{ viaje.valoracion.value }}</td>
+            <td>{{ viaje.comentarios|trim ? '...':'Sin comentarios' }}</td>
+            <td>{{ viaje.idLocalidad.nombre }}</td>
+            <td>{{ viaje.numKilometros }}</td>
+            <td>{{ viaje.importeTotal }}</td>
+            {% if not incrustada|default %}
+                <td>
+                    <a href="{{ path('app_viaje_show', {'id': viaje.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
+                    <a href="{{ path('app_viaje_edit', {'id': viaje.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
+                </td>
+            {% endif %}
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="{{ numCols }}">{{ sin_resultados }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
