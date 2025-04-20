@@ -9,6 +9,7 @@ use App\Entity\TarifaEspera;
 use App\Entity\TarifaKm;
 use App\Entity\Valoracion;
 use App\Entity\Viaje;
+use App\Utils\Globales;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -48,11 +49,13 @@ class ViajeType extends AbstractType
                 'class' => Paciente::class,
                 'choice_label' => 'nombreCompleto',
                 'attr' => ['class' => 'form-select'],
+                'label' => Globales::getGlobales()['etiqueta_nombre_completo_paciente'],
             ])
             ->add('id_conductor', EntityType::class, [
                 'class' => Conductor::class,
                 'choice_label' => 'nombreCompleto',
                 'attr' => ['class' => 'form-select'],
+                'label' => Globales::getGlobales()['etiqueta_nombre_completo_conductor'],
             ])
         ;
 
@@ -61,11 +64,13 @@ class ViajeType extends AbstractType
                 'class' => TarifaEspera::class,
                 'choice_label' => 'nombreTarifa',
                 'attr' => ['class' => 'form-select'],
+                'label' => Globales::getGlobales()['etiqueta_tarifa_espera'],
             ])
             ->add('id_tarifa_km', EntityType::class, [
                 'class' => TarifaKm::class,
                 'choice_label' => 'nombreTarifa',
                 'attr' => ['class' => 'form-select'],
+                'label' => Globales::getGlobales()['etiqueta_tarifa_km'],
             ]);
         }
 

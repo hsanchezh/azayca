@@ -40,4 +40,16 @@ class PacienteRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function getNumPacientesByLocalidad($idLocalidad){
+        $resultados= $this->createQueryBuilder('p')
+            ->join('p.id_localidad', 'l')
+            ->select('COUNT(p)')
+            ->where('l.id = :idLocalidad')
+            ->groupBy('l.id')
+            ->setParameter('idLocalidad', $idLocalidad)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $resultados ? (int) array_values($resultados)[0] : 0;
+    }
 }

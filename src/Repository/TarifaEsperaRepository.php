@@ -57,6 +57,10 @@ class TarifaEsperaRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
 
+        if(empty($consulta)){
+            return null;
+        }
+
         $resultados = [];
 
         foreach ($consulta as $valor){

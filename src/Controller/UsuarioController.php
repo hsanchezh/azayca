@@ -53,7 +53,7 @@ final class UsuarioController extends AbstractController
     #[Route('/{id}/edit', name: 'app_usuario_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Usuario $usuario, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(UsuarioType::class, $usuario);
+        $form = $this->createForm(UsuarioType::class, $usuario, ['checkbox_es_admin'=>$usuario->isEsAdmin()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

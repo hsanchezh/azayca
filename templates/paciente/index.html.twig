@@ -13,7 +13,7 @@
                 <th>{{ etiqueta_nombre_completo_paciente }}</th>
                 <th>{{ etiqueta_email }}</th>
                 <th>{{ etiqueta_telefono1 }}</th>
-                <th>{{ etiqueta_telefono2 }}</th>
+                <th>{{ etiqueta_localidad_paciente }}</th>
                 <th>{{ etiqueta_dni }}</th>
                 <th>{{ etiqueta_es_socio }}</th>
                 <th>{{ etiqueta_codigo_paciente }}</th>
@@ -26,7 +26,7 @@
                 <td>{{ paciente.nombre }} {{ paciente.apellido1 }} {{ paciente.apellido2 }}</td>
                 <td>{{ paciente.email }}</td>
                 <td>{{ paciente.telefono }}</td>
-                <td>{{ paciente.telefono2 }}</td>
+                <td>{{ paciente.idLocalidad.nombre }}</td>
                 <td>{{ paciente.dni }}</td>
                 <td>{{ paciente.esSocio ? booleano_si : booleano_no }}</td>
                 <td>{{ paciente.codigo }}</td>

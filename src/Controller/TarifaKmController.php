@@ -32,14 +32,7 @@ final class TarifaKmController extends AbstractController
             return $this->show($tarifaKmActual, $manager, true);
         }
 
-        $tarifaKm = new TarifaKm();
-        $form = $this->createForm(TarifaKmType::class, $tarifaKm);
-        $form->handleRequest($request);
-
-        return $this->render('tarifa_km/new.html.twig', [
-            'tarifa_km' => $tarifaKm,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('app_tarifa_km_new');
     }
 
     #[Route('/new', name: 'app_tarifa_km_new', methods: ['GET', 'POST'])]

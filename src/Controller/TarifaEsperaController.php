@@ -34,14 +34,7 @@ final class TarifaEsperaController extends AbstractController
             return $this->show($tarifaEsperaActual, $manager, true);
         }
 
-        $tarifaEspera = new TarifaEspera();
-        $form = $this->createForm(TarifaEsperaType::class, $tarifaEspera);
-        $form->handleRequest($request);
-
-        return $this->render('tarifa_espera/new.html.twig', [
-            'tarifa_espera' => $tarifaEspera,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('app_tarifa_espera_new');
     }
 
     #[Route('/new', name: 'app_tarifa_espera_new', methods: ['GET', 'POST'])]

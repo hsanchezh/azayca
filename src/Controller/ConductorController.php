@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Conductor;
+use App\Entity\Viaje;
 use App\Form\ConductorType;
 use App\Repository\ConductorRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -73,6 +74,11 @@ final class ConductorController extends AbstractController
     public function delete(Request $request, Conductor $conductor, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$conductor->getId(), $request->getPayload()->getString('_token'))) {
+            $numViajes=$entityManager->getRepository(Viaje::class)->getNumViajesByConductor($conductor->getId());
+            if($numViajes>0){
+                $this->addFlash('error', 'El conductor '.$conductor->getNombreCompleto().' no puede ser eliminado porque tiene '.$numViajes.' viajes asociados.');
+                return $this->redirectToRoute('app_main_menu', [], Response::HTTP_SEE_OTHER);
+            }
             $entityManager->remove($conductor);
             $entityManager->flush();
         }

@@ -20,47 +20,19 @@ final class InicioController extends AbstractController
     #[Route(path: '/', name: 'app_root')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $numConductores = $entityManager->createQueryBuilder()
-            ->select('COUNT(u.id)')
-            ->from(Conductor::class, 'u')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $numConductores = $entityManager->getRepository(Conductor::class)->count();
 
-        $numUsuarios = $entityManager->createQueryBuilder()
-            ->select('COUNT(u.id)')
-            ->from(Usuario::class, 'u')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $numUsuarios = $entityManager->getRepository(Usuario::class)->count();
 
-        $numLocalidad = $entityManager->createQueryBuilder()
-            ->select('COUNT(u.id)')
-            ->from(Localidad::class, 'u')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $numLocalidad = $entityManager->getRepository(Localidad::class)->count();
 
-        $numPaciente = $entityManager->createQueryBuilder()
-            ->select('COUNT(u.id)')
-            ->from(Paciente::class, 'u')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $numPaciente = $entityManager->getRepository(Paciente::class)->count();
 
-        $numTarifaEspera = $entityManager->createQueryBuilder()
-            ->select('COUNT(u.id)')
-            ->from(TarifaEspera::class, 'u')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $numTarifaEspera = $entityManager->getRepository(TarifaEspera::class)->count();
 
-        $numTarifaKm = $entityManager->createQueryBuilder()
-            ->select('COUNT(u.id)')
-            ->from(TarifaKm::class, 'u')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $numTarifaKm = $entityManager->getRepository(TarifaKm::class)->count();
 
-        $numViajes = $entityManager->createQueryBuilder()
-            ->select('COUNT(u.id)')
-            ->from(Viaje::class, 'u')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $numViajes = $entityManager->getRepository(Viaje::class)->count();
 
         return $this->render('inicio/index.html.twig', [
             'controller_name' => 'InicioController',
@@ -72,5 +44,55 @@ final class InicioController extends AbstractController
             'numTarifaKm' => $numTarifaKm,
             'numViajes' => $numViajes,
         ]);
+    }
+
+    #[Route(path: '/reiniciar', name: 'app_reiniciar')]
+    public function reiniciar(EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->createQueryBuilder()
+            ->from(Viaje::class, 'u')
+            ->delete()
+            ->getQuery()
+            ->execute();
+
+        $entityManager->createQueryBuilder()
+            ->from(Usuario::class, 'u')
+            ->delete()
+            ->getQuery()
+            ->execute();
+
+        $entityManager->createQueryBuilder()
+            ->from(TarifaKm::class, 'u')
+            ->delete()
+            ->getQuery()
+            ->execute();
+
+        $entityManager->createQueryBuilder()
+            ->from(TarifaEspera::class, 'u')
+            ->delete()
+            ->getQuery()
+            ->execute();
+
+        $entityManager->createQueryBuilder()
+            ->from(Paciente::class, 'u')
+            ->delete()
+            ->getQuery()
+            ->execute();
+
+        $entityManager->createQueryBuilder()
+            ->from(Localidad::class, 'u')
+            ->delete()
+            ->getQuery()
+            ->execute();
+
+        $entityManager->createQueryBuilder()
+            ->from(Conductor::class, 'u')
+            ->delete()
+            ->getQuery()
+            ->execute();
+
+        $entityManager->flush();
+
+        return $this->index($entityManager);
     }
 }

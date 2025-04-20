@@ -14,6 +14,7 @@
                 <th>{{ etiqueta_nif_conductor }}</th>
                 <th>{{ etiqueta_fecha_alta }}</th>
                 <th>{{ etiqueta_fecha_baja }}</th>
+                <th>{{ etiqueta_total_viajes }}</th>
                 <th>{{ etiqueta_acciones }}</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>{{ conductor.nif }}</td>
                 <td>{{ conductor.fechaAlta ? conductor.fechaAlta|date('d/m/Y') : '' }}</td>
                 <td>{{ conductor.fechaBaja ? conductor.fechaBaja|date('d/m/Y') : '' }}</td>
+                <td>{{ conductor.viajes|length }}</td>
                 <td>
                     <a href="{{ path('app_conductor_show', {'id': conductor.id}) }}" class="{{ estilo_boton_detalle_incrustado }}">{{ ver_detalle }}</a>
                     <a href="{{ path('app_conductor_edit', {'id': conductor.id}) }}" class="{{ estilo_boton_editar_incrustado }}">{{ editar }}</a>
@@ -31,7 +33,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">{{ sin_resultados }}</td>
+                <td colspan="6">{{ sin_resultados }}</td>
             </tr>
         {% endfor %}
         </tbody>

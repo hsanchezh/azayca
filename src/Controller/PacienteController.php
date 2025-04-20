@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Localidad;
 use App\Entity\Paciente;
+use App\Entity\Viaje;
+use App\Form\LocalidadType;
 use App\Form\PacienteType;
+use App\Repository\LocalidadRepository;
 use App\Repository\PacienteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +29,11 @@ final class PacienteController extends AbstractController
     #[Route('/new', name: 'app_paciente_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        if(!$entityManager->getRepository(Localidad::class)->count()){
+            $this->addFlash('error', 'Antes de crear un paciente es necesario que exista, como mínimo, una localidad.');
+            return $this->redirectToRoute('app_localidad_new');
+        }
+
         $paciente = new Paciente();
         $form = $this->createForm(PacienteType::class, $paciente, ['include_codigo'=>false]);
         $form->handleRequest($request);
@@ -73,6 +82,12 @@ final class PacienteController extends AbstractController
     public function delete(Request $request, Paciente $paciente, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$paciente->getId(), $request->getPayload()->getString('_token'))) {
+            $numViajes=$entityManager->getRepository(Viaje::class)->getNumViajesByPaciente($paciente->getId());
+            if($numViajes>0){
+                $this->addFlash('error', 'El paciente '.$paciente->getNombreCompleto().' no puede ser eliminado porque tiene '.$numViajes.' viajes asociados.');
+                return $this->redirectToRoute('app_main_menu', [], Response::HTTP_SEE_OTHER);
+            }
+
             $entityManager->remove($paciente);
             $entityManager->flush();
         }

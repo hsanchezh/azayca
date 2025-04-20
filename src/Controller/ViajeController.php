@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Conductor;
+use App\Entity\Localidad;
+use App\Entity\Paciente;
 use App\Entity\TarifaEspera;
 use App\Entity\TarifaKm;
 use App\Entity\Viaje;
@@ -34,6 +37,23 @@ final class ViajeController extends AbstractController
         $valoresTarifasEspera=$tarifasEsperaRepository->getJsonValues();
         $valoresTarifasKm=$tarifasKmRepository->getJsonValues();
 
+        if(!$valoresTarifasEspera) {
+            $this->addFlash('error', 'Antes de crear un viaje es necesario que exista una tarifa de espera.');
+            return $this->redirectToRoute('app_tarifa_espera_new');
+        } elseif (!$valoresTarifasKm) {
+            $this->addFlash('error', 'Antes de crear un viaje es necesario que exista una tarifa por kilómetros.');
+            return $this->redirectToRoute('app_tarifa_km_new');
+        } elseif(!$entityManager->getRepository(Localidad::class)->count()){
+            $this->addFlash('error', 'Antes de crear un paciente es necesario que exista, como mínimo, una localidad.');
+            return $this->redirectToRoute('app_localidad_new');
+        } elseif(!$entityManager->getRepository(Paciente::class)->count()){
+            $this->addFlash('error', 'Antes de crear un viaje es necesario que exista, como mínimo, un paciente.');
+            return $this->redirectToRoute('app_paciente_new');
+        } elseif(!$entityManager->getRepository(Conductor::class)->count()){
+            $this->addFlash('error', 'Antes de crear un viaje es necesario que exista, como mínimo, un conductor.');
+            return $this->redirectToRoute('app_conductor_new');
+        }
+
         $tarifaEsperaActual=$tarifasEsperaRepository->findTarifaEsperaActual();
         $tarifaKmActual=$tarifasKmRepository->findTarifaKmActual();
 
@@ -55,7 +75,6 @@ final class ViajeController extends AbstractController
 
             return $this->redirectToRoute('app_viaje_index', [], Response::HTTP_SEE_OTHER);
         }
-
 
         return $this->render('viaje/new.html.twig', [
             'viaje' => $viaje,

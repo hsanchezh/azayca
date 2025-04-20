@@ -26,6 +26,10 @@
                 <td>{{ conductor.nif }}</td>
             </tr>
             <tr>
+                <th>{{ etiqueta_total_viajes }}</th>
+                <td>{{ conductor.viajes|length }}</td>
+            </tr>
+            <tr>
                 <th>{{ etiqueta_fecha_alta }}</th>
                 <td>{{ conductor.fechaAlta ? conductor.fechaAlta|date('d/m/Y') : '' }}</td>
             </tr>

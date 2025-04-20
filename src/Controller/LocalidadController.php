@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Localidad;
+use App\Entity\Paciente;
+use App\Entity\Viaje;
 use App\Form\LocalidadType;
 use App\Repository\LocalidadRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,10 +17,17 @@ use Symfony\Component\Routing\Attribute\Route;
 final class LocalidadController extends AbstractController
 {
     #[Route(name: 'app_localidad_index', methods: ['GET'])]
-    public function index(LocalidadRepository $localidadRepository): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
+        $localidadRepository=$entityManager->getRepository(Localidad::class);
+        $viajeRepository=$entityManager->getRepository(Viaje::class);
+        $localidades = $localidadRepository->findAll();
+        foreach ($localidades as $localidad) {
+            $localidad->setTotalViajes($viajeRepository->getNumViajesByLocalidad($localidad->getId()));
+        }
+
         return $this->render('localidad/index.html.twig', [
-            'localidads' => $localidadRepository->findAll(),
+            'localidads' => $localidades,
         ]);
     }
 
@@ -43,8 +52,11 @@ final class LocalidadController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_localidad_show', methods: ['GET'])]
-    public function show(Localidad $localidad): Response
+    public function show(Localidad $localidad, EntityManagerInterface $entityManager): Response
     {
+        $viajeRepository=$entityManager->getRepository(Viaje::class);
+        $localidad->setTotalViajes($viajeRepository->getNumViajesByLocalidad($localidad->getId()));
+
         return $this->render('localidad/show.html.twig', [
             'localidad' => $localidad,
         ]);
@@ -72,6 +84,19 @@ final class LocalidadController extends AbstractController
     public function delete(Request $request, Localidad $localidad, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$localidad->getId(), $request->getPayload()->getString('_token'))) {
+
+            $numViajes=$entityManager->getRepository(Viaje::class)->getNumViajesByLocalidad($localidad->getId());
+            if($numViajes>0){
+                $this->addFlash('error', 'La localidad '.$localidad->getNombre().' no puede ser eliminada porque tiene '.$numViajes.' viajes asociados.');
+                return $this->redirectToRoute('app_main_menu', [], Response::HTTP_SEE_OTHER);
+            }
+
+            $numPacientes=$entityManager->getRepository(Paciente::class)->getNumPacientesByLocalidad($localidad->getId());
+            if($numPacientes>0){
+                $this->addFlash('error', 'La localidad '.$localidad->getNombre().' no puede ser eliminada porque tiene '.$numPacientes.' pacientes asociados.');
+                return $this->redirectToRoute('app_main_menu', [], Response::HTTP_SEE_OTHER);
+            }
+
             $entityManager->remove($localidad);
             $entityManager->flush();
         }

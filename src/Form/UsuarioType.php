@@ -14,6 +14,8 @@ class UsuarioType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $esAdmin=($options)?$options['checkbox_es_admin']:'false';
+
         $builder
             ->add('login', null, [
                 'attr' => ['class' => 'form-control'],
@@ -32,7 +34,8 @@ class UsuarioType extends AbstractType
                 'attr' => ['class' => 'form-control'],
             ])
             ->add('es_admin', null, [
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-check-label'],
+                'value' => $esAdmin,
             ]);
     }
 
@@ -41,6 +44,7 @@ class UsuarioType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Usuario::class,
             'include_password' => true,
+            'checkbox_es_admin' => 'false',
         ]);
     }
 }

@@ -36,8 +36,8 @@ twig:
         
         navega_ver_localidades: 'Ver localidades'
         navega_nueva_localidad: 'Nueva localidad'
-        navega_detalle_localidad: 'Detalle del conductor'
-        navega_editar_localidad: 'Editar conductor'
+        navega_detalle_localidad: 'Detalle de la localidad'
+        navega_editar_localidad: 'Editar localidad'
         navega_listado_localidades: 'Listado de localidades'
         
         navega_ver_pacientes: 'Ver pacientes'
@@ -90,6 +90,7 @@ twig:
         etiqueta_dni: 'DNI'
         etiqueta_es_socio: 'Es socio'
         etiqueta_codigo_paciente: 'Código'
+        etiqueta_total_viajes: 'Total viajes'
         
 # login
         etiqueta_introduzca_datos_acceso: 'Por favor, introduzca los datos de acceso'
@@ -101,6 +102,7 @@ twig:
         
 # paciente
         etiqueta_nombre_completo_paciente: 'Paciente'
+        etiqueta_localidad_paciente: 'Localidad del paciente'
         
 # localidad
         etiqueta_nombre_localidad: 'Nombre de la localidad'   
@@ -129,6 +131,8 @@ twig:
         etiqueta_precio_km: 'Precio por kilómetro'
         etiqueta_tarifa_espera_actual: 'Tarifa de espera actual'
         etiqueta_tarifa_no_definida: 'Tarifa actual no definida'
+        etiqueta_tarifa_espera: 'Tarifa de espera'
+        etiqueta_tarifa_km: 'Tarifa por km'
         
         
 # estilos

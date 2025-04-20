@@ -18,27 +18,37 @@ class ConductorType extends AbstractType
     {
         $globales = Globales::getGlobales();
         $builder
-            ->add('nombre', TextType::class, [])
-            ->add('apellido1', TextType::class, [])
-            ->add('apellido2', TextType::class, [])
-            ->add('nif', TextType::class, [])
+            ->add('nombre', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('apellido1', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('apellido2', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('nif', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+            ])
             ->add('fecha_alta', DateType::class, [
-                //'widget' => 'single_text',
+                'widget' => 'single_text',
+                'attr' => ['class' => 'form-control'],
             ])
         ;
-/*
+
         if ($options['include_fecha_baja']) {
             $builder->add('fecha_baja', null, [
                 'widget' => 'single_text',
+                'attr' => ['class' => 'form-control'],
             ]);
-        }*/
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Conductor::class,
-            'include_fecha_baja' => true,
+            'include_fecha_baja' => false,
         ]);
     }
 }

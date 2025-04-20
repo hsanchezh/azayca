@@ -16,6 +16,9 @@ class Localidad
     #[ORM\Column(length: 40)]
     private ?string $nombre = null;
 
+    private ?int $totalViajes=0;
+    private ?int $totalPacientes=0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,5 +41,25 @@ class Localidad
         $this->nombre = $nombre;
 
         return $this;
+    }
+
+    public function getTotalViajes(): ?int
+    {
+        return $this->totalViajes;
+    }
+
+    public function setTotalViajes(?int $totalViajes): void
+    {
+        $this->totalViajes = $totalViajes;
+    }
+
+    public function getTotalPacientes(): ?int
+    {
+        return $this->totalPacientes;
+    }
+
+    public function setTotalPacientes(?int $totalPacientes): void
+    {
+        $this->totalPacientes = $totalPacientes;
     }
 }

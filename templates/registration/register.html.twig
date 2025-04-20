@@ -1,10 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
-{% block body %}
+{% block cabecera %}
     <h1>Register</h1>
+{% endblock %}
 
+{% block contenido %}
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
@@ -15,6 +17,6 @@
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.esAdmin) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="{{ estilo_boton_login }}">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

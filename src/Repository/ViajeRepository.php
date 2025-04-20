@@ -62,4 +62,45 @@ class ViajeRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function getNumViajesByLocalidad($idLocalidad){
+        $resultados= $this->createQueryBuilder('v')
+            ->join('v.id_localidad', 'l')
+            ->select('COUNT(v)')
+            ->where('l.id = :idLocalidad')
+            ->groupBy('l.id')
+            ->setParameter('idLocalidad', $idLocalidad)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $resultados ? (int) array_values($resultados)[0] : 0;
+    }
+
+    public function getNumViajesByConductor($idConductor){
+        $resultados= $this->createQueryBuilder('v')
+            ->join('v.id_conductor', 'c')
+            ->select('COUNT(v)')
+            ->where('c.id = :idConductor')
+            ->groupBy('c.id')
+            ->setParameter('idConductor', $idConductor)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $resultados ? (int) array_values($resultados)[0] : 0;
+    }
+
+    public function getNumViajesByPaciente($idPaciente){
+        $resultados= $this->createQueryBuilder('v')
+            ->join('v.id_paciente', 'p')
+            ->select('COUNT(v)')
+            ->where('p.id = :idPaciente')
+            ->groupBy('p.id')
+            ->setParameter('idPaciente', $idPaciente)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $resultados ? (int) array_values($resultados)[0] : 0;
+    }
+
+
 }
